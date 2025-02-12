@@ -7,6 +7,10 @@
     line-height: 1.6;
 }
 
+.Main {
+    padding-top: 3rem;
+}
+
 /* Global link styles */
 a {
     color: #B0B0B0 !important;

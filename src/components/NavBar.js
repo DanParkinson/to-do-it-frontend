@@ -1,20 +1,33 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import styles from "../styles/NavBar.module.css";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <Navbar className={styles.NavBar} fixed="top">
       <Container>
         {/* Brand */}
-        <Navbar.Brand href="#" className={styles.NavBarBrand}>
-          To-Do-It
-        </Navbar.Brand>
+        <NavLink to="/">
+          <Navbar.Brand className={styles.NavBarBrand}>To-Do-It</Navbar.Brand>
+        </NavLink>
 
         {/* Navigation Links */}
         <Nav className={styles.NavLinks}>
-          <Nav.Link href="#">Sign In</Nav.Link>
-          <Nav.Link href="#">Sign Up</Nav.Link>
+          <NavLink
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+            to="/signin"
+          >
+            Sign In
+          </NavLink>
+          <NavLink
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+            to="/signup"
+          >
+            Sign Up
+          </NavLink>
         </Nav>
       </Container>
     </Navbar>

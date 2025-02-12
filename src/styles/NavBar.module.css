@@ -1,13 +1,15 @@
 .NavBar {
     background-color: #252525;
     padding: 0.8rem 1rem;
+    height: 3rem;
 }
 
 .NavBarBrand {
-    color: #E0E0E0;
+    color: #E0E0E0 !important;
     font-weight: bold;
     font-size: 1.5rem;
     text-decoration: none;
+    transition: color 0.3s ease-in-out;
 }
 
 .NavBarBrand:hover {
@@ -18,4 +20,22 @@
     margin-left: auto;
     display: flex;
     gap: 15px;
+}
+
+.NavLink {
+    color: #B0B0B0;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.NavLink:hover {
+    color: #4A90E2;
+    text-decoration: none;
+}
+
+.Active {
+    color: #4A90E2 !important;
+    /* Blue color when active */
+    font-weight: bold;
 }
