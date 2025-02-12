@@ -1,0 +1,21 @@
+.NavBar {
+    background-color: #252525;
+    padding: 0.8rem 1rem;
+}
+
+.NavBarBrand {
+    color: #E0E0E0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.NavBarBrand:hover {
+    color: #4A90E2 !important;
+}
+
+.NavLinks {
+    margin-left: auto;
+    display: flex;
+    gap: 15px;
+}
