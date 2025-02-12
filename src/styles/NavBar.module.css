@@ -39,3 +39,7 @@
     /* Blue color when active */
     font-weight: bold;
 }
+
+.NavUsername {
+    color: #ffffff;
+}

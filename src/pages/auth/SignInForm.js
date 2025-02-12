@@ -1,5 +1,9 @@
+// React imports
 import React, { useState } from "react";
+// Routing
 import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+//Bootstrap
 import {
   Form,
   Button,
@@ -9,26 +13,29 @@ import {
   Container,
   Alert,
 } from "react-bootstrap";
-
+// Styling
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import axios from "axios";
+// Hooks
+import { useSetCurrentUser } from "../../context/CurrentUserContext";
 
-function SignUpForm() {
-  const [signUpData, setSignUpData] = useState({
+function SignInForm() {
+  const setCurrentUser = useSetCurrentUser();
+
+  const [signInData, setSignInData] = useState({
     username: "",
-    password2: "",
+    password: "",
   });
 
-  const { username, password1, password2 } = signUpData;
+  const { username, password } = signInData;
 
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
 
   const handleChange = (event) => {
-    setSignUpData({
-      ...signUpData,
+    setSignInData({
+      ...signInData,
       [event.target.name]: event.target.value,
     });
   };
@@ -36,8 +43,9 @@ function SignUpForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/registration/", signUpData);
-      history.push("/signin");
+      const data = await axios.post("/dj-rest-auth/login/", signInData);
+      setCurrentUser(data.user);
+      history.push("/");
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -51,7 +59,7 @@ function SignUpForm() {
         {/* Sign up form coloumn */}
         <Col xs={12} md={10} lg={6} className="d-flex flex-column">
           <Container>
-            <h1 className={styles.FormTitle}>Sign Up</h1>
+            <h1 className={styles.FormTitle}>Sign In</h1>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="username" className={styles.FormGroup}>
                 <Form.Label className="d-none">Username</Form.Label>
@@ -70,42 +78,25 @@ function SignUpForm() {
                 </Alert>
               ))}
 
-              <Form.Group controlId="password1" className={styles.FormGroup}>
+              <Form.Group controlId="password" className={styles.FormGroup}>
                 <Form.Label className="d-none">Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Password"
-                  name="password1"
+                  name="password"
                   className={styles.FormControl}
-                  value={password1}
+                  value={password}
                   onChange={handleChange}
                 />
               </Form.Group>
-              {errors.password1?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-
-              <Form.Group controlId="password2" className={styles.FormGroup}>
-                <Form.Label className="d-none">Confirm Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Confirm Password"
-                  name="password2"
-                  className={styles.FormControl}
-                  value={password2}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              {errors.password2?.map((message, idx) => (
+              {errors.password?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                   {message}
                 </Alert>
               ))}
 
               <Button type="submit" className={btnStyles.PrimaryButton}>
-                Sign Up
+                Sign In
               </Button>
               {errors.non_field_errors?.map((message, idx) => (
                 <Alert key={idx} variant="warning" className="mt-3">
@@ -116,9 +107,9 @@ function SignUpForm() {
           </Container>
 
           <Container>
-            <Link to="/signin" className={styles.SignInLink}>
-              Have an account?{" "}
-              <span className={styles.SignInText}>Sign in</span>
+            <Link to="/signup" className={styles.SignInLink}>
+              Don't Have an account?{" "}
+              <span className={styles.SignInText}>Sign Up</span>
             </Link>
           </Container>
         </Col>
@@ -138,4 +129,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default SignInForm;
