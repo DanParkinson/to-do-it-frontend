@@ -3,10 +3,8 @@ import { Route, Switch } from "react-router-dom";
 import "./api/axiosDefaults";
 // Components
 import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
 import MainLayout from "./layouts/MainLayout";
 // Styling
-import Container from "react-bootstrap/Container";
 import styles from "./App.module.css";
 // Pages
 import SignUpForm from "./pages/auth/SignUpForm";

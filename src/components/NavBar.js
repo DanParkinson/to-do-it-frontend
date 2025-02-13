@@ -12,10 +12,16 @@ import {
   useSetCurrentUser,
 } from "../context/CurrentUserContext";
 import axios from "axios";
+// Import modals
+import SignInForm from "../pages/auth/SignInForm";
+import SignUpForm from "../pages/auth/SignUpForm";
+import useModal from "../hooks/useModal";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  const signInModal = useModal();
+  const signUpModal = useModal();
 
   const handleSignOut = async () => {
     try {
@@ -52,37 +58,41 @@ const NavBar = () => {
 
   const loggedOutIcons = (
     <>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/signin"
-      >
+      <Nav.Link className={styles.NavLink} onClick={signInModal.openModal}>
         Sign In
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/signup"
-      >
+      </Nav.Link>
+      <Nav.Link className={styles.NavLink} onClick={signUpModal.openModal}>
         Sign Up
-      </NavLink>
+      </Nav.Link>
     </>
   );
 
   return (
-    <Navbar className={styles.NavBar} fixed="top">
-      <Container fluid>
-        {/* Brand */}
-        <NavLink to="/">
-          <Navbar.Brand className={styles.NavBarBrand}>To-Do-It</Navbar.Brand>
-        </NavLink>
+    <>
+      <Navbar className={styles.NavBar} fixed="top">
+        <Container fluid>
+          {/* Brand */}
+          <NavLink to="/">
+            <Navbar.Brand className={styles.NavBarBrand}>To-Do-It</Navbar.Brand>
+          </NavLink>
 
-        {/* Navigation Links */}
-        <Nav className={styles.NavLinks}>
-          {currentUser ? LoggedInIcons : loggedOutIcons}
-        </Nav>
-      </Container>
-    </Navbar>
+          {/* Navigation Links */}
+          <Nav className={styles.NavLinks}>
+            {currentUser ? LoggedInIcons : loggedOutIcons}
+          </Nav>
+        </Container>
+      </Navbar>
+
+      {/* Sign In & Sign Up Modals */}
+      <SignInForm
+        show={signInModal.show}
+        handleClose={signInModal.closeModal}
+      />
+      <SignUpForm
+        show={signUpModal.show}
+        handleClose={signUpModal.closeModal}
+      />
+    </>
   );
 };
 

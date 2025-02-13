@@ -1,6 +1,4 @@
 import React from "react";
-import styles from "../styles/SideBar.module.css";
-import { Container, Row, Col } from "react-bootstrap";
 
 const SideBar = () => {
   return (
