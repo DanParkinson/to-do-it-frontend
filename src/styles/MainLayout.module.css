@@ -1,0 +1,31 @@
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.MainContainer {
+    min-height: 100vh;
+    margin-top: 3rem;
+    overflow: hidden;
+}
+
+.MainRow {
+    height: 100vh;
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.SideBarSection {
+    background-color: #252525;
+    color: #E0E0E0;
+    overflow: hidden;
+}
+
+.MainContent {
+    background-color: #1e1e1e;
+    color: #E0E0E0;
+    padding: 20px;
+    overflow: hidden;
+}

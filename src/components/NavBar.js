@@ -7,16 +7,46 @@ import styles from "../styles/NavBar.module.css";
 // Rouuting
 import { NavLink } from "react-router-dom";
 // Hooks
-import { useCurrentUser } from "../context/CurrentUserContext";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../context/CurrentUserContext";
+import axios from "axios";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
+
+  const handleSignOut = async () => {
+    try {
+      await axios.post("dj-rest-auth/logout/");
+      setCurrentUser(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // console.log("NavBar - Current User:", currentUser); //debugging
-
   const LoggedInIcons = (
     <>
-      <span className={styles.NavLink}>{currentUser?.username}</span>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/tasks/create"
+      >
+        Add post
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to={`/profiles/${currentUser?.profile_id}`}
+      >
+        {currentUser?.username}
+      </NavLink>
+
+      <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
+        Sign Out
+      </NavLink>
     </>
   );
 
