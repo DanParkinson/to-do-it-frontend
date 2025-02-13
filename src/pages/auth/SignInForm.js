@@ -42,11 +42,21 @@ function SignInForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // console.log("SignInForm - User submitted login form:", signInData); // Log form data
+
     try {
-      const data = await axios.post("/dj-rest-auth/login/", signInData);
-      setCurrentUser(data.user);
+      const res = await axios.post("/dj-rest-auth/login/", signInData); // API request
+
+      // console.log("SignInForm - API response:", res); // Log API response
+
+      // console.log("SignInForm - setCurrentUser called with:", res.data); // returning undefined
+
+      setCurrentUser(res.data.user);
+
       history.push("/");
     } catch (err) {
+      console.error("SignInForm - Error response:", err.response?.data); // error response not being called
       setErrors(err.response?.data);
     }
   };

@@ -12,13 +12,14 @@ import { useCurrentUser } from "../context/CurrentUserContext";
 const NavBar = () => {
   const currentUser = useCurrentUser();
 
-  console.log("NavBar - Current User:", currentUser); //debugging
+  // console.log("NavBar - Current User:", currentUser); //debugging
 
   const LoggedInIcons = (
     <>
       <span className={styles.NavLink}>{currentUser?.username}</span>
     </>
   );
+
   const loggedOutIcons = (
     <>
       <NavLink
