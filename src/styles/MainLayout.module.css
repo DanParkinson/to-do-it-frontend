@@ -21,6 +21,7 @@ body {
     background-color: #252525;
     color: #E0E0E0;
     overflow: hidden;
+    border-top: 2px solid #1e1e1e;
 }
 
 .MainContent {
