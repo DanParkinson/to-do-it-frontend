@@ -10,6 +10,7 @@ import styles from "./App.module.css";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import TaskCreateForm from "./pages/tasks/TaskCreateForm";
+import CategoryCreateForm from "./pages/categories/CategoryCreateForm";
 
 function App() {
   return (
@@ -21,6 +22,11 @@ function App() {
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
+          <Route
+            exact
+            path="/categories/create"
+            render={() => <CategoryCreateForm />}
+          />
           <Route render={() => <h1>Page Not Found</h1>} />
         </Switch>
       </MainLayout>

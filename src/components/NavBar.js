@@ -42,7 +42,14 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/tasks/create"
       >
-        Add post
+        Add task
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/categories/create/"
+      >
+        Add category
       </NavLink>
       <NavLink
         className={styles.NavLink}

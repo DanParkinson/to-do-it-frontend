@@ -1,0 +1,45 @@
+.CategoryCreateContainer {
+    max-height: 100vh;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.RowContainer {
+    background-color: #252525;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    padding: 2rem;
+}
+
+.FormTitle {
+    color: #E0E0E0;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.FormGroup {
+    margin-bottom: 25px;
+}
+
+.FormControl {
+    background-color: #E0E0E0;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    width: 100%;
+}
+
+.FormControl:focus {
+    background-color: #FFFFFF;
+    border-color: #4A90E2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    outline: none;
+}
