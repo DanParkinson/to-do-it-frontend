@@ -50,20 +50,6 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/tasks/create"
-      >
-        Add task
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/categories/create/"
-      >
-        Add category
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
         to={`/profiles/${currentUser?.profile_id}`}
       >
         {currentUser?.username}

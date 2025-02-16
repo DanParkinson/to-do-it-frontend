@@ -21,7 +21,15 @@ body {
     background-color: #252525;
     color: #E0E0E0;
     overflow: hidden;
-    border-top: 2px solid #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    position: relative;
+}
+
+.SideBarSection > * {
+    flex: 1;
 }
 
 .MainContent {
