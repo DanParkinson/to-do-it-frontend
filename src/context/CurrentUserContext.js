@@ -3,9 +3,11 @@ import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+// Create context for current user state
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 
+// Custom hooks to access the current user and setter function
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
@@ -13,10 +15,14 @@ export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
 
+  /**
+   * Fetch the currently authenticated user on component mount.
+   * If the user is logged in, set them in state; otherwise, catch errors.
+   */
+
   const handleMount = async () => {
     try {
       const { data } = await axiosRes.get("/dj-rest-auth/user/");
-      // console.log("API Response - user data:", data);
       setCurrentUser(data);
     } catch (err) {
       console.log("API ERROR:", err);
@@ -27,6 +33,11 @@ export const CurrentUserProvider = ({ children }) => {
     handleMount();
   }, []);
 
+  /**
+   * Axios Interceptors:
+   * - Request Interceptor: Refreshes token before making an API request.
+   * - Response Interceptor: Handles 401 errors by attempting token refresh.
+   */
   useMemo(() => {
     axiosReq.interceptors.request.use(
       // Before every request, this function runs.

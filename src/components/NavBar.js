@@ -1,26 +1,36 @@
 // React Imports
 import React from "react";
+
 // Bootstrap
 import { Navbar, Nav, Container } from "react-bootstrap";
+
 // Styles
 import styles from "../styles/NavBar.module.css";
+
 // Rouuting
 import { NavLink } from "react-router-dom";
-// Hooks
+
+// Hooks for authentication and modal handling
 import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../context/CurrentUserContext";
-import axios from "axios";
-// Import modals
-import SignInForm from "../pages/auth/SignInForm";
-import SignUpForm from "../pages/auth/SignUpForm";
 import useModal from "../hooks/useModal";
 import useSwitchAuthModal from "../hooks/useSwitchAuthModal";
 
+// API
+import axios from "axios";
+
+// Import authentication modals
+import SignInForm from "../pages/auth/SignInForm";
+import SignUpForm from "../pages/auth/SignUpForm";
+
 const NavBar = () => {
+  // Get current user and setter function from context
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+
+  // Modal hooks for authentication popups
   const signInModal = useModal();
   const signUpModal = useModal();
   const authModal = useSwitchAuthModal();
@@ -34,7 +44,7 @@ const NavBar = () => {
     }
   };
 
-  // console.log("NavBar - Current User:", currentUser); //debugging
+  // Navigation links for logged-in users.
   const LoggedInIcons = (
     <>
       <NavLink
@@ -65,6 +75,7 @@ const NavBar = () => {
     </>
   );
 
+  // Navigation links for logged-out users.
   const loggedOutIcons = (
     <>
       <Nav.Link className={styles.NavLink} onClick={signInModal.openModal}>

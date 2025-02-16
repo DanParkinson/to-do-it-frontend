@@ -8,7 +8,7 @@ const useSwitchAuthModal = () => {
 
   const openSignIn = () => {
     setShowSignUp(false); // Close Sign Up first
-    setTimeout(() => setShowSignIn(true), 500); // ✅ Small delay to avoid race condition
+    setTimeout(() => setShowSignIn(true), 500); // Small delay to avoid race condition
   };
 
   const openSignUp = () => {
