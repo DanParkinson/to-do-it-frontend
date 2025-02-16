@@ -1,24 +1,9 @@
-.SignInUpContainer {
-    max-height: 100vh;
-    margin-top: 20vh;
-    display: flex;
-    overflow: hidden;
-    padding-top: 4rem;
-    margin: 0;
-}
-
-.RowContainer {
+.FormContainer {
     background-color: #252525;
-    border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     width: 100%;
     margin: auto;
     padding-right: 1.5rem;
-}
-
-.SignupImage {
-    border-radius: 10px;
-    width: 100%;
 }
 
 .FormTitle {

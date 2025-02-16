@@ -16,12 +16,14 @@ import axios from "axios";
 import SignInForm from "../pages/auth/SignInForm";
 import SignUpForm from "../pages/auth/SignUpForm";
 import useModal from "../hooks/useModal";
+import useSwitchAuthModal from "../hooks/useSwitchAuthModal";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const signInModal = useModal();
   const signUpModal = useModal();
+  const authModal = useSwitchAuthModal();
 
   const handleSignOut = async () => {
     try {
@@ -87,10 +89,12 @@ const NavBar = () => {
       <SignInForm
         show={signInModal.show}
         handleClose={signInModal.closeModal}
+        openSignUp={authModal.openSignUp}
       />
       <SignUpForm
         show={signUpModal.show}
         handleClose={signUpModal.closeModal}
+        openSignIn={authModal.openSignIn}
       />
     </>
   );

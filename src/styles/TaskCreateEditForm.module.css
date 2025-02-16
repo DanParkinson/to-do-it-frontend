@@ -23,7 +23,7 @@
     color: #E0E0E0;
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     padding-top: 1rem;
@@ -62,25 +62,6 @@
 .FormControl.Textarea {
     min-height: 150px;
     resize: vertical;
-}
-
-.HiddenRadio {
-    display: none;
-}
-
-.RadioLabel {
-    cursor: pointer;
-    font-size: 1rem;
-    color: #bbb;
-    padding: 8px;
-    transition: color 0.3s ease-in-out;
-}
-
-
-.RadioGroupLabel {
-    min-width: 100px;
-    font-weight: bold;
-    color: #bbb;
 }
 
 .Form {

@@ -33,7 +33,7 @@ export const CurrentUserProvider = ({ children }) => {
       async (config) => {
         try {
           // Attempt to refresh the authentication token before making the request.
-          await axios.post(".dj-rest-auth/token/refresh/");
+          await axios.post("/dj-rest-auth/token/refresh/");
         } catch (err) {
           // If token refresh fails, log out the user.
           setCurrentUser((prevCurrentUser) => {
