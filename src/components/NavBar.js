@@ -1,35 +1,28 @@
-// React Imports
 import React from "react";
-// Bootstrap
-import { Navbar, Nav, Container } from "react-bootstrap";
-// Styles
-import styles from "../styles/NavBar.module.css";
-// Rouuting
 import { NavLink } from "react-router-dom";
-// Hooks for authentication and modal handling
-import {
-  useCurrentUser,
-  useSetCurrentUser,
-} from "../context/CurrentUserContext";
-import useModal from "../hooks/useModal";
-import useSwitchAuthModal from "../hooks/useSwitchAuthModal";
-import { useSetCategories } from "../context/CategoryContext";
-// API
 import axios from "axios";
-// Import authentication modals
+
+import { useCurrentUser } from "../context/CurrentUserContext";
+import { useSetCurrentUser } from "../context/CurrentUserContext";
+import { useSetCategories } from "../context/CategoryContext";
+
+import { Navbar, Nav, Container } from "react-bootstrap";
+import styles from "../styles/NavBar.module.css";
+
+import useModal from "../hooks/useModal";
 import SignInForm from "../pages/auth/SignInForm";
 import SignUpForm from "../pages/auth/SignUpForm";
 
+// Navbar that shows state of of logged in user
+// updates categories in sidebar upon authentication switch
+// Authentication forms loaded in modals
+
 const NavBar = () => {
-  // Get current user and setter function from context
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const setCategories = useSetCategories();
-
-  // Modal hooks for authentication popups
   const signInModal = useModal();
   const signUpModal = useModal();
-  const authModal = useSwitchAuthModal();
 
   const handleSignOut = async () => {
     try {
@@ -90,12 +83,10 @@ const NavBar = () => {
       <SignInForm
         show={signInModal.show}
         handleClose={signInModal.closeModal}
-        openSignUp={authModal.openSignUp}
       />
       <SignUpForm
         show={signUpModal.show}
         handleClose={signUpModal.closeModal}
-        openSignIn={authModal.openSignIn}
       />
     </>
   );

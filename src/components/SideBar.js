@@ -7,25 +7,15 @@ const SideBar = () => {
   const categories = useCategories();
   const currentUser = useCurrentUser();
 
-  if (!currentUser) {
-    return (
-      <aside>
-        <p>Sign in to start organising!</p>
-      </aside>
-    );
-  }
-
-  if (categories === null) {
-    return (
-      <aside>
-        <p>Loading...</p>
-      </aside>
-    );
-  }
-
   return (
     <aside>
-      <CategoryList categories={categories} />
+      {!currentUser ? (
+        <p>Sign in to start organising!</p>
+      ) : categories === null ? (
+        <p>Loading...</p>
+      ) : (
+        <CategoryList categories={categories} />
+      )}
     </aside>
   );
 };
