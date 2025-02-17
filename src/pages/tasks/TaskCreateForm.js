@@ -28,7 +28,7 @@ function TaskCreateForm() {
   });
   const { title, description, category, due_date, priority, status } = taskData;
   const history = useHistory();
-  const refreshCategories = useSetCategories();
+  const setCategories = useSetCategories();
 
   const handleChange = (event) => {
     setTaskData({
@@ -40,17 +40,30 @@ function TaskCreateForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log("Selected Category:", category);
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("category", category);
+    formData.append("category", category || "");
     formData.append("due_date", due_date);
     formData.append("priority", priority);
     formData.append("status", status);
 
     try {
       const { data } = await axiosReq.post("/tasks/", formData);
-      refreshCategories();
+      setCategories((prevCategories) => {
+        return prevCategories.map((category) => {
+          if (category.id === data.category) {
+            return {
+              ...category,
+              task_count: category.task_count + 1,
+              task_ids: [...category.task_ids, data.id],
+            };
+          }
+          return category;
+        });
+      });
       history.push(`/tasks/${data.id}`);
     } catch (err) {
       console.log("Error response status:", err.response.status); // Logs HTTP status code
