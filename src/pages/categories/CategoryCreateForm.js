@@ -10,6 +10,7 @@ import btnStyles from "../../styles/Button.module.css";
 
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useSetCategories } from "../../context/CategoryContext";
 
 function CategoryCreateForm() {
   const [errors, setErrors] = useState({});
@@ -17,8 +18,8 @@ function CategoryCreateForm() {
     name: "",
   });
   const { name } = categoryData;
-
   const history = useHistory();
+  const setCategories = useSetCategories();
 
   const handleChange = (event) => {
     setCategoryData({
@@ -35,7 +36,12 @@ function CategoryCreateForm() {
 
     try {
       const { data } = await axiosReq.post("/categories/", formData);
-      history.push(`/categories/${data.id}`);
+      setCategories((prevCategories) => {
+        const updatedCategories = [...prevCategories, data];
+        return updatedCategories;
+      });
+
+      history.push("/");
     } catch (err) {
       console.log("Error response status:", err.response?.status);
       console.log("Error response data:", err.response?.data);

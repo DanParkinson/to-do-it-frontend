@@ -11,6 +11,7 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
+import { useSetCategories } from "../../context/CategoryContext";
 import useUserCategories from "../../hooks/useUserCategories";
 
 function TaskCreateForm() {
@@ -26,8 +27,8 @@ function TaskCreateForm() {
     status: "",
   });
   const { title, description, category, due_date, priority, status } = taskData;
-
   const history = useHistory();
+  const refreshCategories = useSetCategories();
 
   const handleChange = (event) => {
     setTaskData({
@@ -49,6 +50,7 @@ function TaskCreateForm() {
 
     try {
       const { data } = await axiosReq.post("/tasks/", formData);
+      refreshCategories();
       history.push(`/tasks/${data.id}`);
     } catch (err) {
       console.log("Error response status:", err.response.status); // Logs HTTP status code

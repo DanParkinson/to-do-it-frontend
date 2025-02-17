@@ -2,10 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ListGroup } from "react-bootstrap";
 // import styles from "../styles/Sidebar.module.css";
-import useUserCategories from "../hooks/useUserCategories";
+import { useCategories } from "../context/CategoryContext";
 
 const SideBar = () => {
-  const { categories, loading } = useUserCategories();
+  const categories = useCategories();
+  const loading = categories.length === 0;
 
   return (
     <aside>

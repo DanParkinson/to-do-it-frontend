@@ -1,15 +1,11 @@
 // React Imports
 import React from "react";
-
 // Bootstrap
 import { Navbar, Nav, Container } from "react-bootstrap";
-
 // Styles
 import styles from "../styles/NavBar.module.css";
-
 // Rouuting
 import { NavLink } from "react-router-dom";
-
 // Hooks for authentication and modal handling
 import {
   useCurrentUser,
@@ -17,10 +13,8 @@ import {
 } from "../context/CurrentUserContext";
 import useModal from "../hooks/useModal";
 import useSwitchAuthModal from "../hooks/useSwitchAuthModal";
-
 // API
 import axios from "axios";
-
 // Import authentication modals
 import SignInForm from "../pages/auth/SignInForm";
 import SignUpForm from "../pages/auth/SignUpForm";
