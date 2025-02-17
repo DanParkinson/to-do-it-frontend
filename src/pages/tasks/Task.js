@@ -1,0 +1,60 @@
+import React from "react";
+import { Card, Container, Row, Col } from "react-bootstrap";
+import styles from "../../styles/Task.module.css";
+import btnStyles from "../../styles/Button.module.css";
+
+const Task = (props) => {
+  const {
+    title,
+    description,
+    category,
+    priority,
+    status,
+    due_date,
+    created_at,
+    updated_at,
+  } = props;
+
+  return (
+    <Container fluid className={styles.TaskContainer}>
+      <Card className={styles.TaskCard}>
+        <Card.Body>
+          <h1 className={styles.TaskTitle}>{title}</h1>
+          {/* Row for Main Content */}
+          <Row>
+            {/* Left Side: Description & Dates */}
+            <Col>
+              <Card.Text>{description || "No description"}</Card.Text>
+              <Card.Text>
+                <strong>Created At:</strong>{" "}
+                {new Date(created_at).toLocaleDateString()}
+              </Card.Text>
+              <Card.Text>
+                <strong>Updated At:</strong>{" "}
+                {new Date(updated_at).toLocaleDateString()}
+              </Card.Text>
+            </Col>
+
+            {/* Right Side: Category, Status, Priority, Due Date */}
+            <Col md={6}>
+              <Card.Text>
+                <strong>Category:</strong> {category || "Uncategorized"}
+              </Card.Text>
+              <Card.Text>
+                <strong>Status:</strong> {status}
+              </Card.Text>
+              <Card.Text>
+                <strong>Priority:</strong> {priority}
+              </Card.Text>
+              <Card.Text>
+                <strong>Due Date:</strong> {due_date || "No due date set"}
+              </Card.Text>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
+    </Container>
+  );
+};
+
+export default Task;
