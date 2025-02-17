@@ -11,8 +11,10 @@ export const useCategories = () => useContext(CategoryContext);
 export const useSetCategories = () => useContext(SetCategoryContext);
 
 export const CategoryProvider = ({ children }) => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(null);
   const currentUser = useCurrentUser();
+
+  console.log("CategoryProvider - Categories:", categories);
 
   /**
    * Fetch the user's categories on component mount.
@@ -20,7 +22,7 @@ export const CategoryProvider = ({ children }) => {
    */
   const handleMount = async () => {
     if (!currentUser) {
-      setCategories([]);
+      setCategories(null);
       return;
     }
 
@@ -29,6 +31,7 @@ export const CategoryProvider = ({ children }) => {
       setCategories(data.results);
     } catch (err) {
       console.error("CategoryProvider - API Error:", err);
+      setCategories([]);
     }
   };
 

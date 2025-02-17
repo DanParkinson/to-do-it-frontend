@@ -1,15 +1,31 @@
 import React from "react";
 import { useCategories } from "../context/CategoryContext";
+import { useCurrentUser } from "../context/CurrentUserContext";
 import CategoryList from "./CategoryList";
 
 const SideBar = () => {
   const categories = useCategories();
-  const loading = categories.length === 0;
+  const currentUser = useCurrentUser();
+
+  if (!currentUser) {
+    return (
+      <aside>
+        <p>Sign in to start organising!</p>
+      </aside>
+    );
+  }
+
+  if (categories === null) {
+    return (
+      <aside>
+        <p>Loading...</p>
+      </aside>
+    );
+  }
 
   return (
     <aside>
-      <h2>Categories</h2>
-      {loading ? <p>Loading...</p> : <CategoryList categories={categories} />}
+      <CategoryList categories={categories} />
     </aside>
   );
 };
