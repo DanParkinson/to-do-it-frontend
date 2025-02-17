@@ -4,13 +4,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
-
 import styles from "../../styles/TaskCreateEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
-
 import { useSetCategories } from "../../context/CategoryContext";
 import useUserCategories from "../../hooks/useUserCategories";
 
@@ -66,11 +64,8 @@ function TaskCreateForm() {
       });
       history.push(`/tasks/${data.id}`);
     } catch (err) {
-      console.log("Error response status:", err.response.status); // Logs HTTP status code
-      console.log("Error response data:", err.response.data); // Logs detailed API error
-
       if (err.response?.status === 400) {
-        setErrors(err.response.data); // Set errors for UI display
+        setErrors(err.response.data);
       }
     }
   };

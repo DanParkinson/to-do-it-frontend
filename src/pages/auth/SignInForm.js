@@ -1,14 +1,11 @@
-// React imports
 import React, { useState } from "react";
-// Routing
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-//Bootstrap
+
 import { Form, Button, Container, Alert } from "react-bootstrap";
-// Styling
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
-// Hooks
+
 import { useSetCurrentUser } from "../../context/CurrentUserContext";
 import AuthModal from "../../components/AuthModal";
 
@@ -31,16 +28,13 @@ function SignInForm({ show, handleClose }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log("SignInForm - User submitted login form:", signInData); // Log form data
     try {
-      const res = await axios.post("/dj-rest-auth/login/", signInData); // API request
-      // console.log("SignInForm - API response:", res); // Log API response
-      // console.log("SignInForm - setCurrentUser called with:", res.data); // returning undefined
+      const res = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(res.data.user);
       if (handleClose) handleClose();
       history.push("/");
     } catch (err) {
-      console.error("SignInForm - Error response:", err.response?.data); // error response not being called
+      console.error("SignInForm - Error response:", err.response?.data);
       setErrors(err.response?.data);
     }
   };

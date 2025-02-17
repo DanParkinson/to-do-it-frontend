@@ -1,19 +1,164 @@
-.App {
-    font-family: "Inter", sans-serif;
-    background-color: #121212;
-    min-height: 100vh;
+/* ==============================
+       Global Styles & Layout
+   ============================== */
+
+html,
+body {
     margin: 0;
     padding: 0;
-    line-height: 1.6;
-}
-/* Global link styles */
-a {
-    color: #B0B0B0 !important;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
 }
 
-a:hover {
-    color: #4A90E2 !important;
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==============================
+           Theme Colors
+   ============================== */
+:root {
+    /* Soft Blue */
+    --color-primary: #4A90E2;
+    /* Vibrant Teal */
+    --color-accent: #14B8A6;
+    
+    /* Deep Black */
+    --color-background: #121212;
+    /* Dark Grey */
+    --color-surface: #1E1E1E;
+    /* Charcoal */
+    --color-secondary-surface: #252525;
+    
+
+    /* Light Grey */
+    --color-text-primary: #E0E0E0;
+    /* Muted Grey */
+    --color-text-secondary: #B0B0B0;
+    /* Dim Grey */
+    --color-text-disabled: #6B6B6B;
+    
+    /* Green */
+    --color-success: #81C784;
+    /* Amber */
+    --color-warning: #FFB74D;
+    /* Red */
+    --color-error: #E57373;
+    
+    /* Darker Grey */
+    --color-border: #333333;
+    /* Slightly Darker Grey */
+    --color-hover: #292929;
+    /* Darker Input Background */
+    --color-input-bg: #2C2C2C;
+    /* Light Blue Border */
+    --color-input-focus: #93C5FD;
+}
+
+/* ==============================
+            Typography
+   ============================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-primary);
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ==============================
+         Layout Utilities
+   ============================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.gap-1 {
+    gap: 0.5rem;
+}
+
+.gap-2 {
+    gap: 1rem;
+}
+
+.gap-3 {
+    gap: 1.5rem;
+}
+
+/* ==============================
+          Forms & Inputs
+   ============================== */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-input-bg);
+    color: var(--color-text-primary);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-input-focus);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+/* ==============================
+         Modals & Popups
+   ============================== */
+.modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ==============================
+        Responsive Design
+   ============================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0.75rem;
+    }
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import styles from "../../styles/Task.module.css";
-import btnStyles from "../../styles/Button.module.css";
 
 const Task = (props) => {
   const {

@@ -1,14 +1,11 @@
-// React imports
 import React, { useState } from "react";
-// Routing
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-//Bootstrap
+
 import { Form, Button, Container, Alert } from "react-bootstrap";
-// Styling
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
-// Hooks
+
 import AuthModal from "../../components/AuthModal";
 
 function SignUpForm({ show, handleClose }) {
@@ -32,7 +29,7 @@ function SignUpForm({ show, handleClose }) {
     try {
       await axios.post("/dj-rest-auth/registration/", signUpData);
       if (handleClose) handleClose();
-      history.push("/"); // needs to be directed to sign in modal
+      history.push("/");
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -109,7 +106,7 @@ function SignUpForm({ show, handleClose }) {
           to="#"
           className={styles.SignInLink}
           onClick={() => {
-            handleClose(); // Close Sign Up modal
+            handleClose();
           }}
         >
           Already have an account?{" "}
