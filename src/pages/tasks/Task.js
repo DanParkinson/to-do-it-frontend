@@ -5,9 +5,11 @@ import btnStyles from "../../styles/Button.module.css";
 
 const Task = (props) => {
   const {
+    id,
+    owner,
     title,
     description,
-    category,
+    category_name,
     priority,
     status,
     due_date,
@@ -38,7 +40,7 @@ const Task = (props) => {
             {/* Right Side: Category, Status, Priority, Due Date */}
             <Col md={6}>
               <Card.Text>
-                <strong>Category:</strong> {category || "Uncategorized"}
+                <strong>Category:</strong> {category_name || "Uncategorized"}
               </Card.Text>
               <Card.Text>
                 <strong>Status:</strong> {status}

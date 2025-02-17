@@ -11,8 +11,11 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
+import useUserCategories from "../../hooks/useUserCategories";
+
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
+  const { categories, loading } = useUserCategories();
 
   const [taskData, setTaskData] = useState({
     title: "",
@@ -125,9 +128,19 @@ function TaskCreateForm() {
                     name="category"
                   >
                     <option value="">Select a Category</option>
-                    <option>Work</option>
-                    <option>Personal</option>
-                    <option>Shopping</option>
+                    {loading ? (
+                      <option disabled>Loading categories...</option>
+                    ) : categories.length > 0 ? (
+                      categories.map((cat) => (
+                        <option key={cat.id} value={cat.id}>
+                          {cat.name}
+                        </option>
+                      ))
+                    ) : (
+                      <option disabled>
+                        You need to create a category first!
+                      </option>
+                    )}
                   </Form.Control>
                 </Form.Group>
                 {errors?.category?.map((message, idx) => (

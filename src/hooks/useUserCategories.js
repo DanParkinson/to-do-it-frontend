@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { axiosReq } from "../api/axiosDefaults";
 
-const useCategories = () => {
+const useUserCategories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const { data } = await axiosReq.get("/categories/");
-        setCategories(data);
+        setCategories(data.results);
       } catch (err) {
         console.error("Error fetching categories:", err);
-        setError(err);
+        setCategories([]);
       } finally {
         setLoading(false);
       }
@@ -21,7 +21,7 @@ const useCategories = () => {
     fetchCategories();
   }, []);
 
-  return { categories, loading, error };
+  return { categories, loading };
 };
 
-export default useCategories;
+export default useUserCategories;
