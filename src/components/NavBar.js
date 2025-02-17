@@ -13,6 +13,7 @@ import {
 } from "../context/CurrentUserContext";
 import useModal from "../hooks/useModal";
 import useSwitchAuthModal from "../hooks/useSwitchAuthModal";
+import { useSetCategories } from "../context/CategoryContext";
 // API
 import axios from "axios";
 // Import authentication modals
@@ -23,6 +24,7 @@ const NavBar = () => {
   // Get current user and setter function from context
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  const setCategories = useSetCategories();
 
   // Modal hooks for authentication popups
   const signInModal = useModal();
@@ -33,6 +35,7 @@ const NavBar = () => {
     try {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
+      setCategories([]);
     } catch (err) {
       console.log(err);
     }
