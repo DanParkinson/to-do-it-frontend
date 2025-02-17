@@ -131,9 +131,9 @@ function TaskCreateForm() {
                     {loading ? (
                       <option disabled>Loading categories...</option>
                     ) : categories.length > 0 ? (
-                      categories.map((cat) => (
-                        <option key={cat.id} value={cat.id}>
-                          {cat.name}
+                      categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
                         </option>
                       ))
                     ) : (

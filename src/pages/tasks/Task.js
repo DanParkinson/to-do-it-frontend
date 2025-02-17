@@ -38,7 +38,7 @@ const Task = (props) => {
             </Col>
 
             {/* Right Side: Category, Status, Priority, Due Date */}
-            <Col md={6}>
+            <Col>
               <Card.Text>
                 <strong>Category:</strong> {category_name || "Uncategorized"}
               </Card.Text>
