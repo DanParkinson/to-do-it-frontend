@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import { axiosReq } from "../api/axiosDefaults";
 
-const useCategoryTasks = (taskIds) => {
+// Fetches tasks that belong to a specific category based on task IDs.
+const useCategoryTasks = (taskIds, isExpanded) => {
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchTasks = async () => {
-      if (!taskIds || taskIds.length === 0) {
+      if (!isExpanded || !taskIds || taskIds.length === 0) {
         setTasks([]);
-        setLoading(false);
         return;
       }
 
+      setLoading(true);
       try {
         const { data } = await axiosReq.get(`/tasks/?ids=${taskIds.join(",")}`);
         setTasks(data.results);
@@ -24,7 +25,7 @@ const useCategoryTasks = (taskIds) => {
     };
 
     fetchTasks();
-  }, [taskIds]);
+  }, [taskIds, isExpanded]);
 
   return { tasks, loading };
 };

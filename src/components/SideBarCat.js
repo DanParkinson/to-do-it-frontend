@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { ListGroup, Button, Collapse } from "react-bootstrap";
+import { axiosReq } from "../api/axiosDefaults";
 
 import useToggle from "../hooks/useToggle";
-import TaskList from "./TaskList";
+import useCategoryTaskMap from "../hooks/useCategoryTaskMap";
 
-import styles from "../styles/components/CategoryList.module.css";
+import styles from "../styles/components/SideBarCat.module.css";
 import btnStyles from "../styles/general/Button.module.css";
 
 // This produces a list of the users categories
 // All categories loaded as links
 // Categories have use of expand toggle to show task lists
 
-const CategoryList = ({ categories }) => {
-  const { expandeditems, toggleItem } = useToggle();
+const SideBarCat = ({ categories }) => {
+  const { expandedItems, toggleItem } = useToggle();
+  const categoryTaskMap = useCategoryTaskMap(categories);
 
   return (
     <ListGroup className={styles.CategoryList}>
@@ -25,7 +27,7 @@ const CategoryList = ({ categories }) => {
               onClick={() => toggleItem(category.id)}
               className={btnStyles.ToggleButton}
             >
-              {expandeditems.includes(category.id) ? "−" : "+"}
+              {expandedItems.includes(category.id) ? "-" : "+"}
             </Button>
             <NavLink
               to={`/categories/${category.id}`}
@@ -34,10 +36,21 @@ const CategoryList = ({ categories }) => {
               {category.name}
             </NavLink>
           </ListGroup.Item>
+
+          {/* Task List */}
+          <ListGroup className={styles.TaskList}>
+            {categoryTaskMap[category.id]?.map((task) => (
+              <ListGroup.Item key={task.id} className={styles.TaskItem}>
+                <NavLink to={`/tasks/${task.id}`} className={styles.TaskLink}>
+                  {task.title}
+                </NavLink>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         </div>
       ))}
     </ListGroup>
   );
 };
 
-export default CategoryList;
+export default SideBarCat;

@@ -3,11 +3,11 @@ import { useState } from "react";
 const useToggle = () => {
   const [expandedItems, setExpandedItems] = useState([]);
 
-  const toggleItem = (itemId) => {
+  const toggleItem = (Id) => {
     setExpandedItems((prevExpanded) =>
-      prevExpanded.includes(itemId)
-        ? prevExpanded.filter((id) => id !== itemId)
-        : [...prevExpanded, itemId]
+      prevExpanded.includes(Id)
+        ? prevExpanded.filter((item) => item !== Id)
+        : [...prevExpanded, Id]
     );
   };
 

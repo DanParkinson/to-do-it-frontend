@@ -22,13 +22,33 @@ export const CategoryProvider = ({ children }) => {
    */
   const handleMount = async () => {
     if (!currentUser) {
+      console.log(
+        "CategoryProvider - No current user, setting categories to null"
+      );
       setCategories(null);
       return;
     }
 
     try {
       const { data } = await axiosReq.get("/categories/");
-      setCategories(data.results);
+
+      if (!data.results) {
+        console.log(
+          "CategoryProvider - No categories found, setting empty array"
+        );
+        setCategories([]);
+        return;
+      }
+
+      const categoriesWithTaskIds = data.results.map((category) => ({
+        ...category,
+        task_ids: category.task_ids || [],
+      }));
+      console.log(
+        "CategoryProvider - Fetched Categories:",
+        categoriesWithTaskIds
+      );
+      setCategories(categoriesWithTaskIds);
     } catch (err) {
       console.error("CategoryProvider - API Error:", err);
       setCategories([]);

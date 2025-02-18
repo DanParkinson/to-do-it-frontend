@@ -59,7 +59,7 @@ const SidebarNav = () => {
 
           <OverlayTrigger placement="right" overlay={renderTooltip("New Task")}>
             <ListGroup.Item className={iconStyles.ListGroupItem}>
-              <i class="fa-solid fa-square-plus"></i>
+              <i className="fa-solid fa-square-plus"></i>
             </ListGroup.Item>
           </OverlayTrigger>
 
@@ -68,7 +68,7 @@ const SidebarNav = () => {
             overlay={renderTooltip("New Category")}
           >
             <ListGroup.Item className={iconStyles.ListGroupItem}>
-              <i class="fa-regular fa-square-plus"></i>
+              <i className="fa-regular fa-square-plus"></i>
             </ListGroup.Item>
           </OverlayTrigger>
         </ListGroup>

@@ -2,8 +2,8 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 import SideBarNav from "./SideBarNav";
+import SideBarCat from "./SideBarCat";
 
-import CategoryList from "./CategoryList";
 import { useCategories } from "../context/CategoryContext";
 
 import styles from "../styles/components/SideBar.module.css";
@@ -23,7 +23,7 @@ const SideBar = () => {
       <Col lg={10} md={9} className={styles.SideBarContent}>
         <h4> Categories</h4>
         {categories?.length > 0 ? (
-          <CategoryList categories={categories} />
+          <SideBarCat categories={categories} />
         ) : (
           <p>You don't have any categories yet.</p>
         )}
