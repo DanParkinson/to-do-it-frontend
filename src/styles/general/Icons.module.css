@@ -1,0 +1,15 @@
+.ListGroupItem {
+    background: none !important;
+    border: none !important;
+    color: var(--color-text-primary);
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 10px 0;
+    transition: color 0.3s ease-in-out;
+}
+
+/* On hover, change color for better UX */
+.ListGroupItem:hover {
+    color: var(--color-accent);
+    cursor: pointer;
+}

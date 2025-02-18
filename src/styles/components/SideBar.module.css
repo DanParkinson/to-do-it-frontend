@@ -1,0 +1,29 @@
+.SideBarRow {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0;
+}
+
+.SideBarContent {
+    background-color: var(--color-surface);
+    height: calc(100vh - 3rem);
+    transition: transform 0.3s ease-in-out;
+    border-top-left-radius: 5px;
+}
+
+.SideBarNav {
+    height: calc(100vh - 3rem);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.NavTop {
+    display: flex;
+    flex-direction: column;
+}
+
+.NavBottom {
+    margin-top: auto;
+}
