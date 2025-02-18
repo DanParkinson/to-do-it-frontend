@@ -56,6 +56,21 @@ const SidebarNav = () => {
               <i className="fa-solid fa-list"></i>
             </ListGroup.Item>
           </OverlayTrigger>
+
+          <OverlayTrigger placement="right" overlay={renderTooltip("New Task")}>
+            <ListGroup.Item className={iconStyles.ListGroupItem}>
+              <i class="fa-solid fa-square-plus"></i>
+            </ListGroup.Item>
+          </OverlayTrigger>
+
+          <OverlayTrigger
+            placement="right"
+            overlay={renderTooltip("New Category")}
+          >
+            <ListGroup.Item className={iconStyles.ListGroupItem}>
+              <i class="fa-regular fa-square-plus"></i>
+            </ListGroup.Item>
+          </OverlayTrigger>
         </ListGroup>
       </div>
 

@@ -1,0 +1,46 @@
+.CategoryList {
+    width: 100%;
+}
+
+.CategoryItem {
+    background-color: var(--color-hover);
+    border: none !important;
+    text-decoration: none !important;
+    max-height: 2.5rem;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    
+}
+
+.CategoryItem:hover {
+    background: var(--color-secondary-surface);
+    text-decoration: none !important;
+    border: none !important;
+    transition: background 0.2s ease-in-out;
+    
+}
+
+.CategoryLink { 
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    display: block;
+    text-transform: capitalize;
+    flex-grow: 1;
+}
+
+.CategoryLink:hover{
+    color: var(--color-accent);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.CategoryLink.active {
+    color: var(--color-primary);
+    font-weight: bold;
+}

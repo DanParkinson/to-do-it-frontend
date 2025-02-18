@@ -14,3 +14,33 @@
 .PrimaryButton:hover {
     background-color: #2563EB;
 }
+
+.ToggleButton {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--color-text);
+    width: 20px;
+    text-decoration: none;
+
+}
+
+.ToggleButton:hover {
+    color: var(--color-accent);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ToggleButton.active {
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+.ToggleButton:focus,
+.ToggleButton:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    text-decoration: none !important;
+}

@@ -1,39 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 
-// hooks
-import useExpandToggle from "../hooks/useExpandToggle";
-
-// Components
-import TaskList from "./TaskList";
+import styles from "../styles/components/CategoryList.module.css";
+import btnStyles from "../styles/general/Button.module.css";
+import useCategoryTasks from "../hooks/useCategoryTasks";
+import useToggle from "../hooks/useToggle";
 
 // This produces a list of the users categories
 // All categories loaded as links
 // Categories have use of expand toggle to show task lists
 
 const CategoryList = ({ categories }) => {
-  const { expanded, toggle } = useExpandToggle();
+  const { expandedItems, toggleItem } = useToggle();
 
   return (
-    <ListGroup className="flex-column">
+    <ListGroup className={styles.CategoryList}>
       {categories.map((category) => (
-        <div key={category.id}>
-          {/* Category Name */}
-          <ListGroup.Item>
-            <NavLink
-              to={`/categories/${category.id}`}
-              onClick={() => {
-                toggle(category.id);
-              }}
-            >
-              {expanded[category.id] ? "▼" : "▶"} {category.name}
-            </NavLink>
-          </ListGroup.Item>
-
-          {/* Expandable Task List */}
-          {expanded[category.id] && <TaskList taskIds={category.task_ids} />}
-        </div>
+        <ListGroup.Item key={category.id} className={styles.CategoryItem}>
+          <Button
+            variant="link"
+            onClick={() => toggleItem(category.id)}
+            className={btnStyles.ToggleButton}
+          >
+            {expandedItems.includes(category.id) ? "−" : "+"}
+          </Button>
+          <NavLink
+            to={`/categories/${category.id}`}
+            className={styles.CategoryLink}
+          >
+            {category.name}
+          </NavLink>
+        </ListGroup.Item>
       ))}
     </ListGroup>
   );

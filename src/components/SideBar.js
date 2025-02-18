@@ -1,24 +1,32 @@
 import React from "react";
-import { Col, Row, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+
+import SideBarNav from "./SideBarNav";
+
+import CategoryList from "./CategoryList";
+import { useCategories } from "../context/CategoryContext";
 
 import styles from "../styles/components/SideBar.module.css";
 
-import SidebarNav from "./SideBarNav";
-
 const SideBar = () => {
   //const setCategories = useSetCategories();
-  //const categories = useCategories();
+  const categories = useCategories();
   //const currentUser = useCurrentUser();
   return (
     <Row className={styles.SideBarRow}>
       {/* Left Section: Navigation List */}
       <Col lg={2} md={3} sm={12} xs={12} className={styles.SideBarNav}>
-        <SidebarNav />
+        <SideBarNav />
       </Col>
 
       {/* Right Section: Placeholder Content */}
       <Col lg={10} md={9} className={styles.SideBarContent}>
-        <h2>Home</h2>
+        <h4> Categories</h4>
+        {categories?.length > 0 ? (
+          <CategoryList categories={categories} />
+        ) : (
+          <p>You don't have any categories yet.</p>
+        )}
       </Col>
     </Row>
   );
