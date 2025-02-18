@@ -58,7 +58,10 @@ const SidebarNav = () => {
           </OverlayTrigger>
 
           <OverlayTrigger placement="right" overlay={renderTooltip("New Task")}>
-            <ListGroup.Item className={iconStyles.ListGroupItem}>
+            <ListGroup.Item
+              className={iconStyles.ListGroupItem}
+              onClick={() => history.push("/tasks/create")}
+            >
               <i className="fa-solid fa-square-plus"></i>
             </ListGroup.Item>
           </OverlayTrigger>
@@ -67,7 +70,10 @@ const SidebarNav = () => {
             placement="right"
             overlay={renderTooltip("New Category")}
           >
-            <ListGroup.Item className={iconStyles.ListGroupItem}>
+            <ListGroup.Item
+              className={iconStyles.ListGroupItem}
+              onClick={() => history.push("/categories/create")}
+            >
               <i className="fa-regular fa-square-plus"></i>
             </ListGroup.Item>
           </OverlayTrigger>

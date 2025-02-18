@@ -40,7 +40,7 @@ function CategoryCreateForm() {
         return updatedCategories;
       });
 
-      history.push("/");
+      history.push(`/categories/${data.id}`);
     } catch (err) {
       console.log("Error response status:", err.response?.status);
       console.log("Error response data:", err.response?.data);
