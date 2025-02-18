@@ -12,7 +12,6 @@ import TaskCreateForm from "./pages/tasks/TaskCreateForm";
 import CategoryCreateForm from "./pages/categories/CategoryCreateForm";
 import TaskPage from "./pages/tasks/TaskPage";
 import CategoryPage from "./pages/categories/CategoryPage";
-import NavBar from "./components/NavBar";
 // Context
 import { useCurrentUser } from "./context/CurrentUserContext";
 
@@ -40,7 +39,6 @@ function App() {
         ) : (
           // Main Layout for Protected Routes (Authenticated Users Only)
           <MainLayout>
-            <NavBar />
             <Switch>
               <Route
                 exact
