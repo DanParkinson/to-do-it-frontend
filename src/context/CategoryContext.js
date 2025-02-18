@@ -14,17 +14,12 @@ export const CategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState(null);
   const currentUser = useCurrentUser();
 
-  console.log("CategoryProvider - Categories:", categories);
-
   /**
    * Fetch the user's categories on component mount.
    * If the user has categories, store them in state.
    */
   const handleMount = async () => {
     if (!currentUser) {
-      console.log(
-        "CategoryProvider - No current user, setting categories to null"
-      );
       setCategories(null);
       return;
     }
@@ -33,9 +28,6 @@ export const CategoryProvider = ({ children }) => {
       const { data } = await axiosReq.get("/categories/");
 
       if (!data.results) {
-        console.log(
-          "CategoryProvider - No categories found, setting empty array"
-        );
         setCategories([]);
         return;
       }
@@ -44,10 +36,6 @@ export const CategoryProvider = ({ children }) => {
         ...category,
         task_ids: category.task_ids || [],
       }));
-      console.log(
-        "CategoryProvider - Fetched Categories:",
-        categoriesWithTaskIds
-      );
       setCategories(categoriesWithTaskIds);
     } catch (err) {
       console.error("CategoryProvider - API Error:", err);

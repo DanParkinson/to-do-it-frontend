@@ -1,34 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import Category from "./Category";
 
-function CategoryPage() {
+const CategoryPage = () => {
   const { id } = useParams();
-  const [category, setCategory] = useState({ results: [] });
+  const [category, setCategory] = useState(null);
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const handleMount = async () => {
+    const fetchCategoryAndTasks = async () => {
       try {
-        const { data } = await axiosReq.get(`/categories/${id}/`);
-        setCategory({ results: [data] });
-        console.log(data);
+        // Step 1: Fetch Category
+        const { data: categoryData } = await axiosReq.get(`/categories/${id}/`);
+        // console.log("Fetched category data:", categoryData);
+        setCategory(categoryData);
+
+        // Step 2: Fetch Tasks using task_ids
+        if (categoryData.task_ids.length > 0) {
+          const { data: taskData } = await axiosReq.get(
+            `/tasks/?ids=${categoryData.task_ids.join(",")}`
+          );
+          // console.log("Fetched tasks:", taskData.results);
+          setTasks(taskData.results);
+        } else {
+          setTasks([]); // No tasks in this category
+        }
       } catch (err) {
-        console.error("Error fetching category:", err);
+        console.error("Error fetching category or tasks:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
-    handleMount();
+    fetchCategoryAndTasks();
   }, [id]);
 
-  return (
-    <Row className="h-100">
-      <Col>
-        <Category {...category.results[0]} categoryPage />
-      </Col>
-    </Row>
-  );
-}
+  if (loading) return <p>Loading category...</p>;
+  if (!category) return <p>Category not found.</p>;
+
+  return <Category category={category} tasks={tasks} />;
+};
 
 export default CategoryPage;

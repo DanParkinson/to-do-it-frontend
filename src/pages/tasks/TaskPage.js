@@ -6,28 +6,31 @@ import Task from "./Task";
 
 function TaskPage() {
   const { id } = useParams();
-  const [task, setTask] = useState({ results: [] });
+  const [task, setTask] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const [{ data: task }] = await Promise.all([
-          axiosReq.get(`/tasks/${id}`),
-        ]);
-        setTask({ results: [task] });
-        console.log(task);
+        const { data } = await axiosReq.get(`/tasks/${id}/`);
+        setTask(data);
       } catch (err) {
-        console.log(err);
+        console.error("Error fetching task:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     handleMount();
   }, [id]);
 
+  if (loading) return <p>Loading task...</p>;
+  if (!task) return <p>Task not found</p>;
+
   return (
     <Row className="h-100">
       <Col>
-        <Task {...task.results[0]} taskPage />
+        <Task {...task} taskPage />
       </Col>
     </Row>
   );

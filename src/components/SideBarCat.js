@@ -19,15 +19,18 @@ const SideBarCat = ({ categories }) => {
   return (
     <ListGroup className={styles.CategoryList}>
       {categories.map((category) => (
-        <div>
-          <ListGroup.Item key={category.id} className={styles.CategoryItem}>
+        <div key={category.id}>
+          <ListGroup.Item className={styles.CategoryItem}>
             <Button
               variant="link"
-              onClick={() => toggleItem(category.id)}
+              onClick={() => {
+                toggleItem(category.id);
+              }}
               className={btnStyles.ToggleButton}
             >
               {expandedItems.includes(category.id) ? "-" : "+"}
             </Button>
+
             <NavLink
               to={`/categories/${category.id}`}
               className={styles.CategoryLink}

@@ -1,22 +1,20 @@
 import React from "react";
-import useCategoryTasks from "../../hooks/useCategoryTasks";
 
-const Category = (props) => {
-  const { id, name, owner, task_count, created_at, task_ids } = props;
-
-  console.log("Category.js - task_ids:", task_ids);
-  const { tasks, loading } = useCategoryTasks(task_ids);
+const Category = ({ category, tasks }) => {
+  const { name, owner, task_count, task_ids, created_at } = category;
 
   return (
     <div>
       <h2>{name}</h2>
-      <p>Task Count: {task_count}</p>
-      <p>Created At: {created_at}</p>
+      <p>
+        <strong>Task Count:</strong> {task_count}
+      </p>
+      <p>
+        <strong>Created At:</strong> {created_at}
+      </p>
 
       <h3>Tasks</h3>
-      {loading ? (
-        <p>...Loading</p>
-      ) : tasks.length > 0 ? (
+      {tasks.length > 0 ? (
         <table>
           <thead>
             <tr>

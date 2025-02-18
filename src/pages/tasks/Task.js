@@ -27,12 +27,10 @@ const Task = (props) => {
             <Col>
               <Card.Text>{description || "No description"}</Card.Text>
               <Card.Text>
-                <strong>Created At:</strong>{" "}
-                {new Date(created_at).toLocaleDateString()}
+                <strong>Created At:</strong> {created_at}
               </Card.Text>
               <Card.Text>
-                <strong>Updated At:</strong>{" "}
-                {new Date(updated_at).toLocaleDateString()}
+                <strong>Updated At:</strong> {updated_at}
               </Card.Text>
             </Col>
 

@@ -1,12 +1,12 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import styles from "../styles/layouts/MainLayout.module.css";
 
 import TopBar from "../components/TopBar";
 import SideBar from "../components/SideBar";
 
-const MainLayout = () => {
+import styles from "../styles/layouts/MainLayout.module.css";
+
+const MainLayout = ({ children }) => {
   return (
     <>
       <TopBar />
@@ -20,7 +20,7 @@ const MainLayout = () => {
 
           {/* Main Content */}
           <Col lg={9} md={8} sm={10} xs={10} className={styles.MainContent}>
-            <h2> Main Content</h2>
+            {children}
           </Col>
         </Row>
       </Container>
