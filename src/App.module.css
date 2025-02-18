@@ -27,6 +27,7 @@ body {
     /* Vibrant Teal */
     --color-accent: #14B8A6;
     
+    /* backgrounds */
     /* Deep Black */
     --color-background: #121212;
     /* Dark Grey */
@@ -34,7 +35,7 @@ body {
     /* Charcoal */
     --color-secondary-surface: #252525;
     
-
+    /* text */
     /* Light Grey */
     --color-text-primary: #E0E0E0;
     /* Muted Grey */
@@ -48,15 +49,16 @@ body {
     --color-warning: #FFB74D;
     /* Red */
     --color-error: #E57373;
-    
-    /* Darker Grey */
-    --color-border: #333333;
-    /* Slightly Darker Grey */
-    --color-hover: #292929;
-    /* Darker Input Background */
-    --color-input-bg: #2C2C2C;
-    /* Light Blue Border */
-    --color-input-focus: #93C5FD;
+
+    /* forms */
+    /* Off white */
+    --color-formbackground: #E0E0E0;
+    /* white */
+    --color-formhover: #FFFFFF;
+    /* white */
+    --color-forminput-bg: #FFFFFF;
+    /* white */ 
+    --color-forminput-focus: #FFFFFF;
 }
 
 /* ==============================

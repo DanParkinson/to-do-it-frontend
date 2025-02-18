@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import styles from "../../styles/CategoryCreateEditForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
+import btnStyles from "../../styles/general/Button.module.css";
 
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";

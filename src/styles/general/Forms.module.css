@@ -1,0 +1,37 @@
+@import "../../App.module.css";
+
+.FormTitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.FormGroup {
+    margin-bottom: 1rem;
+}
+
+/* Input Fields */
+.FormControl {
+    background-color: #E0E0E0;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid var(--color-formborder);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+.FormControl:hover {
+    background-color: var(--color-formhover);
+}
+
+.FormControl:focus {
+    background-color: var(--color-forminput-focus);
+    border-color: #4A90E2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    outline: none;
+}

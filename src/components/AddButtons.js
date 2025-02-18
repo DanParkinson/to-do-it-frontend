@@ -3,7 +3,7 @@ import { Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 import styles from "../styles/AddButtons.module.css";
-import btnStyles from "../styles/Button.module.css";
+import btnStyles from "../styles/general/Button.module.css";
 
 // A reusable button component for submission of data and rerouting
 

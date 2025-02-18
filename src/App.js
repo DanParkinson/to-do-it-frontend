@@ -1,10 +1,9 @@
 // Routing
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import "./api/axiosDefaults";
-// Components
+// Layouts and style
 import MainLayout from "./layouts/MainLayout";
 import LandingLayout from "./layouts/LandingLayout";
-// Styling
 import styles from "./App.module.css";
 // Pages
 import SignUpForm from "./pages/auth/SignUpForm";
@@ -14,49 +13,56 @@ import CategoryCreateForm from "./pages/categories/CategoryCreateForm";
 import TaskPage from "./pages/tasks/TaskPage";
 import CategoryPage from "./pages/categories/CategoryPage";
 import NavBar from "./components/NavBar";
-
+// Context
 import { useCurrentUser } from "./context/CurrentUserContext";
 
 function App() {
   const currentUser = useCurrentUser();
   const location = useLocation();
-  const isAuthPage = ["/signin", "/signup"].includes(location.pathname);
+  const isAuthPage = ["/", "/signin", "/signup"].includes(location.pathname);
 
   return (
     <div className={styles.App}>
-      {isAuthPage || !currentUser ? (
-        <LandingLayout>
-          <Switch>
-            <Route exact path="/signin" render={() => <SignInForm />} />
-            <Route exact path="/signup" render={() => <SignUpForm />} />
-            <Route render={() => <SignInForm />} /> {/* Default to sign in */}
-          </Switch>
-        </LandingLayout>
-      ) : (
-        <MainLayout>
-          <NavBar />
-          <Switch>
-            <Route exact path="/" render={() => <h1>Home Page</h1>} />
-            <Route
-              exact
-              path="/tasks/create"
-              render={() => <TaskCreateForm />}
-            />
-            <Route
-              exact
-              path="/categories/create"
-              render={() => <CategoryCreateForm />}
-            />
-            <Route exact path="/tasks/:id" render={() => <TaskPage />} />
-            <Route
-              exact
-              path="/categories/:id"
-              render={() => <CategoryPage />}
-            />
-            <Route render={() => <h1>Page Not Found</h1>} />
-          </Switch>
-        </MainLayout>
-      )}
+      <Switch>
+        {/* Redirect signed-in users to /tasks */}
+        {currentUser && isAuthPage && <Redirect to="/tasks" />}
+
+        {/* Landing Page Layout for Authentication Routes */}
+        {isAuthPage ? (
+          <LandingLayout>
+            <Switch>
+              <Route exact path="/" render={() => <SignInForm />} />
+              <Route exact path="/signin" render={() => <SignInForm />} />
+              <Route exact path="/signup" render={() => <SignUpForm />} />
+              <Route render={() => <SignInForm />} /> {/* Default to Sign In */}
+            </Switch>
+          </LandingLayout>
+        ) : (
+          // Main Layout for Protected Routes (Authenticated Users Only)
+          <MainLayout>
+            <NavBar />
+            <Switch>
+              <Route
+                exact
+                path="/tasks/create"
+                render={() => <TaskCreateForm />}
+              />
+              <Route
+                exact
+                path="/categories/create"
+                render={() => <CategoryCreateForm />}
+              />
+              <Route exact path="/tasks/:id" render={() => <TaskPage />} />
+              <Route
+                exact
+                path="/categories/:id"
+                render={() => <CategoryPage />}
+              />
+              <Route render={() => <h1>Page Not Found</h1>} />
+            </Switch>
+          </MainLayout>
+        )}
+      </Switch>
     </div>
   );
 }
