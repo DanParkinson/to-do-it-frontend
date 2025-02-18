@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { ListGroup, Button, Collapse } from "react-bootstrap";
-import { axiosReq } from "../api/axiosDefaults";
 
 import useToggle from "../hooks/useToggle";
 import useCategoryTaskMap from "../hooks/useCategoryTaskMap";
@@ -20,7 +19,7 @@ const SideBarCat = ({ categories }) => {
   return (
     <ListGroup className={styles.CategoryList}>
       {categories.map((category) => (
-        <div key={category.id}>
+        <div>
           <ListGroup.Item key={category.id} className={styles.CategoryItem}>
             <Button
               variant="link"
@@ -38,15 +37,28 @@ const SideBarCat = ({ categories }) => {
           </ListGroup.Item>
 
           {/* Task List */}
-          <ListGroup className={styles.TaskList}>
-            {categoryTaskMap[category.id]?.map((task) => (
-              <ListGroup.Item key={task.id} className={styles.TaskItem}>
-                <NavLink to={`/tasks/${task.id}`} className={styles.TaskLink}>
-                  {task.title}
-                </NavLink>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+          <Collapse in={expandedItems.includes(category.id)}>
+            <div>
+              <ListGroup className={styles.TaskList}>
+                {category.task_ids.length > 0 ? (
+                  categoryTaskMap[category.id]?.map((task) => (
+                    <ListGroup.Item key={task.id} className={styles.TaskItem}>
+                      <NavLink
+                        to={`/tasks/${task.id}`}
+                        className={styles.TaskLink}
+                      >
+                        {task.title}
+                      </NavLink>
+                    </ListGroup.Item>
+                  ))
+                ) : (
+                  <ListGroup.Item className={styles.TaskItem}>
+                    No tasks in this category.
+                  </ListGroup.Item>
+                )}
+              </ListGroup>
+            </div>
+          </Collapse>
         </div>
       ))}
     </ListGroup>

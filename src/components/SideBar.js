@@ -21,7 +21,6 @@ const SideBar = () => {
 
       {/* Right Section: Placeholder Content */}
       <Col lg={10} md={9} className={styles.SideBarContent}>
-        <h4> Categories</h4>
         {categories?.length > 0 ? (
           <SideBarCat categories={categories} />
         ) : (

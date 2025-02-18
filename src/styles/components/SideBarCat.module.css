@@ -20,8 +20,7 @@
     background: var(--color-secondary-surface);
     text-decoration: none !important;
     border: none !important;
-    transition: background 0.2s ease-in-out;
-    
+    transition: background 0.2s ease-in-out; 
 }
 
 .CategoryLink { 
@@ -43,4 +42,45 @@
 .CategoryLink.active {
     color: var(--color-primary);
     font-weight: bold;
+}
+
+.TaskList {
+    list-style: none;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.TaskItem {
+    background-color: var(--color-surface);
+    padding: 0.1rem 2rem;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 2px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.TaskItem:hover {
+    background: var(--color-secondary-surface);
+    text-decoration: none !important;
+    border: none !important;
+    transition: background 0.2s ease-in-out;
+}
+
+.TaskLink {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    display: block;
+    text-transform: capitalize;
+    flex-grow: 1;
+
+}
+
+.TaskLink:hover {
+    color: var(--color-accent);
+    cursor: pointer;
+    text-decoration: none;
 }
