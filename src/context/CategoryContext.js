@@ -26,20 +26,11 @@ export const CategoryProvider = ({ children }) => {
 
     try {
       const { data } = await axiosReq.get("/categories/");
-
-      if (!data.results) {
-        setCategories([]);
-        return;
-      }
-
-      const categoriesWithTaskIds = data.results.map((category) => ({
-        ...category,
-        task_ids: category.task_ids || [],
-      }));
-      setCategories(categoriesWithTaskIds);
+      setCategories(data.results);
     } catch (err) {
       console.error("CategoryProvider - API Error:", err);
       setCategories([]);
+    } finally {
     }
   };
 

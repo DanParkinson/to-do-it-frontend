@@ -4,6 +4,8 @@ import { ListGroup, Button, Collapse } from "react-bootstrap";
 
 import useToggle from "../hooks/useToggle";
 import useCategoryTaskMap from "../hooks/useCategoryTaskMap";
+import { useCategories } from "../context/CategoryContext";
+import LoadingIndicator from "./LoadingIndicator";
 
 import styles from "../styles/components/SideBarCat.module.css";
 import btnStyles from "../styles/general/Button.module.css";
@@ -12,9 +14,14 @@ import btnStyles from "../styles/general/Button.module.css";
 // All categories loaded as links
 // Categories have use of expand toggle to show task lists
 
-const SideBarCat = ({ categories }) => {
+const SideBarCat = () => {
+  const categories = useCategories();
   const { expandedItems, toggleItem } = useToggle();
   const categoryTaskMap = useCategoryTaskMap(categories);
+
+  if (categories === null) {
+    return <LoadingIndicator spinner message="Loading categories..." />;
+  }
 
   return (
     <ListGroup className={styles.CategoryList}>
