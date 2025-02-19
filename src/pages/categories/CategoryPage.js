@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import Category from "./Category";
+import LoadingIndicator from "../../components/LoadingIndicator";
 
 const CategoryPage = () => {
   const { id } = useParams();
   const [category, setCategory] = useState(null);
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const fetchCategoryAndTasks = async () => {
+      setHasLoaded(false);
       try {
         // Step 1: Fetch Category
         const { data: categoryData } = await axiosReq.get(`/categories/${id}/`);
@@ -30,17 +32,20 @@ const CategoryPage = () => {
       } catch (err) {
         console.error("Error fetching category or tasks:", err);
       } finally {
-        setLoading(false);
+        setHasLoaded(true);
       }
     };
 
     fetchCategoryAndTasks();
   }, [id]);
 
-  if (loading) return <p>Loading category...</p>;
-  if (!category) return <p>Category not found.</p>;
-
-  return <Category category={category} tasks={tasks} />;
+  return !hasLoaded ? (
+    <LoadingIndicator spinner message="Loading category..." />
+  ) : !category ? (
+    <p>Category not found.</p>
+  ) : (
+    <Category category={category} tasks={tasks} />
+  );
 };
 
 export default CategoryPage;

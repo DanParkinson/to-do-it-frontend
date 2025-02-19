@@ -1,7 +1,7 @@
 import React from "react";
 
 const Category = ({ category, tasks }) => {
-  const { name, owner, task_count, task_ids, created_at } = category;
+  const { name, task_count, created_at } = category;
 
   return (
     <div>

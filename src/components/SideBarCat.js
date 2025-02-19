@@ -19,6 +19,7 @@ const SideBarCat = () => {
   const { expandedItems, toggleItem } = useToggle();
   const categoryTaskMap = useCategoryTaskMap(categories);
 
+  // users will always have a category 'uncategorised' so will never be perpetual
   if (categories === null) {
     return <LoadingIndicator spinner message="Loading categories..." />;
   }
