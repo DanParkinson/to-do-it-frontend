@@ -52,7 +52,10 @@ const SidebarNav = () => {
           </OverlayTrigger>
 
           <OverlayTrigger placement="right" overlay={renderTooltip("Tasks")}>
-            <ListGroup.Item className={iconStyles.ListGroupItem}>
+            <ListGroup.Item
+              className={iconStyles.ListGroupItem}
+              onClick={() => history.push("/tasks")}
+            >
               <i className="fa-solid fa-list"></i>
             </ListGroup.Item>
           </OverlayTrigger>

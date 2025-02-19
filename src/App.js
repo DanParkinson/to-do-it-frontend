@@ -14,6 +14,7 @@ import TaskPage from "./pages/tasks/TaskPage";
 import CategoryPage from "./pages/categories/CategoryPage";
 // Context
 import { useCurrentUser } from "./context/CurrentUserContext";
+import TasksPage from "./pages/Taskspage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -31,8 +32,6 @@ function App() {
           <LandingLayout>
             <Switch>
               <Route exact path="/" render={() => <SignInForm />} />
-              <Route exact path="/signin" render={() => <SignInForm />} />
-              <Route exact path="/signup" render={() => <SignUpForm />} />
               <Route render={() => <SignInForm />} /> {/* Default to Sign In */}
             </Switch>
           </LandingLayout>
@@ -56,6 +55,7 @@ function App() {
                 path="/categories/:id"
                 render={() => <CategoryPage />}
               />
+              <Route exact path="/tasks" render={() => <TasksPage />} />
               <Route render={() => <h1>Page Not Found</h1>} />
             </Switch>
           </MainLayout>

@@ -12,7 +12,7 @@
 }
 
 .PrimaryButton:hover {
-    background-color: #2563EB;
+    background-color: var(--color-accent);
 }
 
 .ToggleButton {

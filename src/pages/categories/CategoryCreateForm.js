@@ -4,8 +4,10 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
+
 import styles from "../../styles/CategoryCreateEditForm.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
+import formStyles from "../../styles/general/Forms.module.css";
 
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
@@ -52,21 +54,19 @@ function CategoryCreateForm() {
   };
 
   return (
-    <Container fluid className={styles.CategoryCreateContainer}>
-      <Row
-        className={`justify-content-center align-items-center ${styles.RowContainer}`}
-      >
-        <Col xs={12} md={10} lg={8}>
+    <Container fluid className={styles.MainContainer}>
+      <Row>
+        <Col>
           <Form onSubmit={handleSubmit}>
-            <h1 className={styles.FormTitle}>Create a Category</h1>
+            <h1 className={styles.Heading}>Create a Category</h1>
 
             {/* Category Name */}
-            <Form.Group controlId="name" className={styles.FormGroup}>
+            <Form.Group controlId="name" className={formStyles.FormGroup}>
               <Form.Label className="d-none">Category Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter category name"
-                className={styles.FormControl}
+                className={formStyles.FormControl}
                 name="name"
                 value={name}
                 onChange={handleChange}
