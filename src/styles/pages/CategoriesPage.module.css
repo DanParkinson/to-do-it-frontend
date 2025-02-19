@@ -1,0 +1,118 @@
+@import "../../App.module.css";
+
+.Heading {
+    font-size: 2rem;
+}
+
+.CategoryContainer {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.CategoryRow {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.CategoryCol {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.CategoryCard {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-surface);
+}
+
+.CategoryCard:hover {
+    transform: scale(1.02);
+    box-shadow: 2px 2px 10px var(--color-accent);
+}
+
+.CategoryCardBody {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.CategoryTitle {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.CategoryDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.75rem;
+}
+
+.TaskCount {
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.CreatedAt {
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.CategoryLink {
+    all: unset;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.CategoryLink:hover {
+    all: unset;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+    .CategoryTitle {
+        font-size: 0.6rem;
+    }
+
+    .CategoryDetails,
+    .TaskCount,
+    .CreatedAt {
+        font-size: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .CategoryTitle {
+        font-size: 0.9rem;
+    }
+
+    .CategoryDetails,
+    .TaskCount,
+    .CreatedAt {
+        font-size: 0.75rem;
+    }
+}

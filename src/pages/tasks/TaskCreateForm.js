@@ -12,11 +12,11 @@ import formStyles from "../../styles/general/Forms.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useSetCategories } from "../../context/CategoryContext";
-import useUserCategories from "../../hooks/useUserCategories";
+import useFetchCategories from "../../hooks/useFetchCategories";
 
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
-  const { categories, loading } = useUserCategories();
+  const { categories, hasLoaded } = useFetchCategories();
 
   const [taskData, setTaskData] = useState({
     title: "",
@@ -138,7 +138,7 @@ function TaskCreateForm() {
                 className={formStyles.FormControl}
               >
                 <option value="">Select a Category</option>
-                {loading ? (
+                {!hasLoaded ? (
                   <option disabled>Loading categories...</option>
                 ) : categories.length > 0 ? (
                   categories.map((category) => (

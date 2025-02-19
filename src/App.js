@@ -14,6 +14,7 @@ import CategoryPage from "./pages/categories/CategoryPage";
 import TasksPage from "./pages/tasks/TasksPage";
 // Context
 import { useCurrentUser } from "./context/CurrentUserContext";
+import CategoriesPage from "./pages/categories/CategoriesPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -55,6 +56,11 @@ function App() {
                 render={() => <CategoryPage />}
               />
               <Route exact path="/tasks" render={() => <TasksPage />} />
+              <Route
+                exact
+                path="/categories"
+                render={() => <CategoriesPage />}
+              />
               <Route render={() => <h1>Page Not Found</h1>} />
             </Switch>
           </MainLayout>

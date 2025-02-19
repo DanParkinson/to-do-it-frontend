@@ -46,7 +46,10 @@ const SidebarNav = () => {
             placement="right"
             overlay={renderTooltip("Categories")}
           >
-            <ListGroup.Item className={iconStyles.ListGroupItem}>
+            <ListGroup.Item
+              className={iconStyles.ListGroupItem}
+              onClick={() => history.push("/categories")}
+            >
               <i className="fa-solid fa-folder"></i>
             </ListGroup.Item>
           </OverlayTrigger>

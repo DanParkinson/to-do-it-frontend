@@ -18,7 +18,7 @@ const SideBar = () => {
         <SideBarNav />
       </Col>
 
-      {/* Right Section: Placeholder Content */}
+      {/* Right Section: */}
       <Col lg={10} md={9} className={styles.SideBarContent}>
         <SideBarCat categories={categories} />
       </Col>

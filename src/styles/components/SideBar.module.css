@@ -2,6 +2,8 @@
     display: flex;
     flex-wrap: nowrap;
     padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .SideBarContent {
@@ -9,6 +11,8 @@
     height: calc(100vh - 3rem);
     transition: transform 0.3s ease-in-out;
     border-top-left-radius: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .SideBarNav {
@@ -26,4 +30,11 @@
 
 .NavBottom {
     margin-top: auto;
+}
+
+@media screen and (max-width: 425px) {
+    .SideBarContent {
+        display: none;
+    }
+
 }

@@ -1,5 +1,6 @@
 .CategoryList {
     width: 100%;
+
 }
 
 .CategoryItem {
@@ -76,6 +77,19 @@
     display: block;
     text-transform: capitalize;
     flex-grow: 1;
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .TaskLink {
+        font-size: 0.75rem;
+        
+    }
+
+    .TaskItem {
+        padding-left: 0.3rem;
+    }
 
 }
 
