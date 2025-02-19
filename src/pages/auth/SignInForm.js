@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import { Form, Button, Container, Alert } from "react-bootstrap";
-import styles from "../../styles/SignInUpForm.module.css";
+import styles from "../../styles/pages/SignInUpForm.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 import formStyles from "../../styles/general/Forms.module.css";
 

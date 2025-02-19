@@ -6,15 +6,14 @@ import MainLayout from "./layouts/MainLayout";
 import LandingLayout from "./layouts/LandingLayout";
 import styles from "./App.module.css";
 // Pages
-import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import TaskCreateForm from "./pages/tasks/TaskCreateForm";
 import CategoryCreateForm from "./pages/categories/CategoryCreateForm";
 import TaskPage from "./pages/tasks/TaskPage";
 import CategoryPage from "./pages/categories/CategoryPage";
+import TasksPage from "./pages/tasks/TasksPage";
 // Context
 import { useCurrentUser } from "./context/CurrentUserContext";
-import TasksPage from "./pages/Taskspage";
 
 function App() {
   const currentUser = useCurrentUser();

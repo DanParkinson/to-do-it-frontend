@@ -1,0 +1,138 @@
+@import "../../App.module.css";
+
+/* Task Page Container */
+.TaskContainer {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    height: 95%;
+    padding: 20px;
+    padding-top: 0;
+}
+
+/* Task Title Section */
+.TitleRow {
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.BackButtonCol {
+    padding:0;
+    margin:0;
+    margin-right: auto;
+}
+
+.TitleCol {
+    width: 100%;
+}
+
+.Title {
+    font-size: 2rem;
+    text-transform: capitalize;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+/* Task Description */
+.DescriptionRow {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.DescriptionCol {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.DescriptionText {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+/* Task Details Section */
+.DetailsRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.DetailsCol {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px;
+}
+
+/* Created & Updated Section */
+.TimeRow {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.TimeCol {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Buttons */
+.ButtonRow {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+    max-width: 600px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 992px) {
+    .TitleRow {
+        margin-bottom: 0;
+    }
+    .DescriptionRow {
+        margin-bottom: 0;
+    }
+    .DetailsRow {
+        margin-bottom: 0;
+    }
+    .TimeRow {
+        margin-bottom: 0;
+        max-height: 6rem;
+    }
+    .TimeCol {
+        padding:0;
+    }
+    .TimeCol p {
+        margin-bottom: 0;
+    }
+     
+
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .Title {
+        font-size: 1rem;
+    }
+
+    .DescriptionText {
+        font-size: 0.9rem;
+    }
+
+    .DetailsCol {
+        padding-bottom: 0;
+        padding-top: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+
+    }
+}
+

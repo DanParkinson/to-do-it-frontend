@@ -1,32 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { axiosReq } from "../api/axiosDefaults";
-import LoadingIndicator from "../components/LoadingIndicator";
 import { Card, Container, Row, Col } from "react-bootstrap";
-import styles from "../styles/TasksPage.module.css";
+
+import LoadingIndicator from "../../components/LoadingIndicator";
+import useFetchTasks from "../../hooks/useFetchTasks";
+import { truncateText } from "../../utils/textUtils";
+
+import styles from "../../styles/pages/TasksPage.module.css";
 
 const TasksPage = () => {
-  const [tasks, setTasks] = useState([]);
-  const [hasLoaded, setHasLoaded] = useState(false);
-  const truncateText = (text, maxLength) => {
-    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
-  };
+  const { tasks, hasLoaded } = useFetchTasks();
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      setHasLoaded(false);
-      try {
-        const { data } = await axiosReq.get("/tasks/");
-        setTasks(data.results);
-      } catch (err) {
-        console.error("Error fetching tasks:", err);
-      } finally {
-        setHasLoaded(true);
-      }
-    };
-
-    fetchTasks();
-  }, []);
   return (
     <Container fluid className={styles.TaskContainer}>
       <h1 className={styles.Heading}>All Tasks</h1>
