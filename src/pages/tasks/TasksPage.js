@@ -4,6 +4,7 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchTasks from "../../hooks/useFetchTasks";
+import { useTaskFilters } from "../../context/TaskFilterContext";
 import { truncateText } from "../../utils/textUtils";
 
 import styles from "../../styles/pages/TasksPage.module.css";

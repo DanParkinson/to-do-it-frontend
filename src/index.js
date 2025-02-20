@@ -6,14 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { CurrentUserProvider } from "./context/CurrentUserContext";
 import { CategoryProvider } from "./context/CategoryContext";
+import { TaskFilterProvider } from "./context/TaskFilterContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <CurrentUserProvider>
-        <CategoryProvider>
-          <App />
-        </CategoryProvider>
+        <TaskFilterProvider>
+          <CategoryProvider>
+            <App />
+          </CategoryProvider>
+        </TaskFilterProvider>
       </CurrentUserProvider>
     </Router>
   </React.StrictMode>,

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/components/TopBar.module.css";
 import SearchBar from "./SearchBar";
-import TaskFilterControls from "./TaskFIlterControls";
+import TaskFilterControls from "./TaskFilterControls";
 
 const TopBar = () => {
   return (
