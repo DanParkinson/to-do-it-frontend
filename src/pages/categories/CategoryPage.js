@@ -1,48 +1,108 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
-import Category from "./Category";
+import React from "react";
+import { useParams, NavLink } from "react-router-dom";
+import { Container, Col, Row, Card, Button } from "react-bootstrap";
+
 import LoadingIndicator from "../../components/LoadingIndicator";
+import useFetchCategory from "../../hooks/useFetchCategory";
+import { truncateText } from "../../utils/textUtils";
+
+import styles from "../../styles/pages/CategoryPage.module.css";
+import btnStyles from "../../styles/general/Button.module.css";
 
 const CategoryPage = () => {
   const { id } = useParams();
-  const [category, setCategory] = useState(null);
-  const [tasks, setTasks] = useState([]);
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const { category, tasks, hasLoaded } = useFetchCategory(id);
 
-  useEffect(() => {
-    const fetchCategoryAndTasks = async () => {
-      setHasLoaded(false);
-      try {
-        // Step 1: Fetch Category
-        const { data: categoryData } = await axiosReq.get(`/categories/${id}/`);
-        setCategory(categoryData);
+  return (
+    <Container fluid className={styles.CategoryContainer}>
+      {!hasLoaded ? (
+        <LoadingIndicator spinner message="Loading category..." />
+      ) : category ? (
+        <>
+          {/* Back Button */}
+          <Row className={styles.BackButtonRow}>
+            <Col className={styles.BackButtonCol}>
+              <Button
+                variant="link"
+                className={btnStyles.BackIcon}
+                onClick={() => window.history.back()}
+              >
+                <i className="fa-regular fa-circle-left"></i>
+              </Button>
+            </Col>
+          </Row>
 
-        // Step 2: Fetch Tasks using task_ids
-        if (categoryData.task_ids.length > 0) {
-          const { data: taskData } = await axiosReq.get(
-            `/tasks/?ids=${categoryData.task_ids.join(",")}`
-          );
-          setTasks(taskData.results);
-        } else {
-          setTasks([]); // No tasks in this category
-        }
-      } catch (err) {
-        console.error("Error fetching category or tasks:", err);
-      } finally {
-        setHasLoaded(true);
-      }
-    };
+          {/* Category Title */}
+          <Row className={styles.TitleRow}>
+            <Col className={styles.TitleCol}>
+              <h1 className={styles.Title}>{category.name}</h1>
+            </Col>
+          </Row>
 
-    fetchCategoryAndTasks();
-  }, [id]);
+          {/* Category Details */}
+          <Row className={styles.DetailsRow}>
+            <Col className={styles.DetailsCol}>
+              <p>
+                <strong>Task Count:</strong> {category.task_count}
+              </p>
+              <p>
+                <strong>Created At:</strong> {category.created_at}
+              </p>
+            </Col>
+          </Row>
 
-  return !hasLoaded ? (
-    <LoadingIndicator spinner message="Loading category..." />
-  ) : !category ? (
-    <p>Category not found.</p>
-  ) : (
-    <Category category={category} tasks={tasks} />
+          {/* Tasks List */}
+          <h2 className={styles.TaskHeading}>Tasks in this Category</h2>
+          <Row className={styles.TaskRow}>
+            {tasks.length > 0 ? (
+              tasks.map((task) => (
+                <Col
+                  key={task.id}
+                  lg={4}
+                  md={6}
+                  xs={12}
+                  className={styles.TaskCol}
+                >
+                  <NavLink to={`/tasks/${task.id}`} className={styles.TaskLink}>
+                    <Card className={styles.TaskCard}>
+                      <Card.Body className={styles.TaskCardBody}>
+                        <Card.Title className={styles.TaskTitle}>
+                          {truncateText(task.title, 15)}
+                        </Card.Title>
+                        <Card.Text className={styles.TaskDetails}>
+                          <span className={styles.TaskStatus}>
+                            {" "}
+                            {task.status}
+                          </span>
+                          <span className={styles.TaskPriority}>
+                            {task.priority}
+                          </span>
+                          <span className={styles.TaskDueDate}>
+                            {task.due_date || "N/A"}
+                          </span>
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </NavLink>
+                </Col>
+              ))
+            ) : (
+              <p className={styles.NoTasks}>No tasks in this category.</p>
+            )}
+          </Row>
+
+          {/* Action Buttons */}
+          <Row className={styles.ButtonRow}>
+            <Col className={styles.ButtonCol}>
+              <Button className={btnStyles.PrimaryButton}>Edit</Button>
+              <Button className={btnStyles.DeleteButton}>Delete</Button>
+            </Col>
+          </Row>
+        </>
+      ) : (
+        <p className={styles.NotFound}>Category not found.</p>
+      )}
+    </Container>
   );
 };
 
