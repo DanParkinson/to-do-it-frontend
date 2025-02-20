@@ -11,10 +11,6 @@ const TaskFilterControls = () => {
   const { groupBy, sortBy, order } = useTaskFilters();
   const setFilters = useSetTaskFilters();
 
-  const handleApply = () => {
-    setFilters({ groupBy, sortBy, order });
-  };
-
   const handleReset = () => {
     setFilters({
       groupBy: "None",

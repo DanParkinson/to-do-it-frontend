@@ -12,6 +12,9 @@ import CategoryCreateForm from "./pages/categories/CategoryCreateForm";
 import TaskPage from "./pages/tasks/TaskPage";
 import CategoryPage from "./pages/categories/CategoryPage";
 import TasksPage from "./pages/tasks/TasksPage";
+
+import CompletedTasksPage from "./pages/tasks/CompletedTasksPage";
+
 // Context
 import { useCurrentUser } from "./context/CurrentUserContext";
 import CategoriesPage from "./pages/categories/CategoriesPage";
@@ -44,12 +47,21 @@ function App() {
                 path="/tasks/create"
                 render={() => <TaskCreateForm />}
               />
+
               <Route
                 exact
                 path="/categories/create"
                 render={() => <CategoryCreateForm />}
               />
+
               <Route exact path="/tasks/:id" render={() => <TaskPage />} />
+
+              <Route
+                exact
+                path="/tasks/completed"
+                render={() => <CompletedTasksPage />}
+              />
+
               <Route
                 exact
                 path="/categories/:id"
@@ -61,6 +73,7 @@ function App() {
                 path="/categories"
                 render={() => <CategoriesPage />}
               />
+
               <Route render={() => <h1>Page Not Found</h1>} />
             </Switch>
           </MainLayout>

@@ -40,9 +40,6 @@ const CategoriesPage = () => {
                       <span className={styles.TaskCount}>
                         Tasks: {category.task_count}
                       </span>
-                      <span className={styles.CreatedAt}>
-                        Created: {category.created_at}
-                      </span>
                     </Card.Text>
                   </Card.Body>
                 </Card>

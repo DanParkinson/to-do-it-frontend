@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { axiosReq } from "../api/axiosDefaults";
 
-const useFetchTasks = () => {
+const useFetchTasks = (completed = false) => {
   const [tasks, setTasks] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -9,7 +9,8 @@ const useFetchTasks = () => {
     const fetchTasks = async () => {
       setHasLoaded(false);
       try {
-        const { data } = await axiosReq.get("/tasks/");
+        const endpoint = completed ? "/tasks/completed/" : "/tasks/";
+        const { data } = await axiosReq.get(endpoint);
         setTasks(data.results);
       } catch (err) {
         console.error("Error fetching tasks:", err);
@@ -19,7 +20,7 @@ const useFetchTasks = () => {
     };
 
     fetchTasks();
-  }, []);
+  }, [completed]);
 
   return { tasks, hasLoaded };
 };

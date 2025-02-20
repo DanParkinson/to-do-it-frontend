@@ -54,9 +54,6 @@ const CategoryPage = () => {
               <p>
                 <strong>Task Count:</strong> {category.task_count}
               </p>
-              <p>
-                <strong>Created At:</strong> {category.created_at}
-              </p>
             </Col>
           </Row>
 
@@ -86,15 +83,8 @@ const CategoryPage = () => {
                               {truncateText(task.title, 15)}
                             </Card.Title>
                             <Card.Text className={styles.TaskDetails}>
-                              <span className={styles.TaskStatus}>
-                                {" "}
-                                {task.status}
-                              </span>
-                              <span className={styles.TaskPriority}>
-                                {task.priority}
-                              </span>
                               <span className={styles.TaskDueDate}>
-                                {task.due_date || "N/A"}
+                                Due Date: {task.due_date || "N/A"}
                               </span>
                             </Card.Text>
                           </Card.Body>
@@ -106,14 +96,6 @@ const CategoryPage = () => {
               </div>
             ))
           )}
-
-          {/* Action Buttons */}
-          <Row className={styles.ButtonRow}>
-            <Col className={styles.ButtonCol}>
-              <Button className={btnStyles.PrimaryButton}>Edit</Button>
-              <Button className={btnStyles.DeleteButton}>Delete</Button>
-            </Col>
-          </Row>
         </>
       ) : (
         <p className={styles.NotFound}>Category not found.</p>

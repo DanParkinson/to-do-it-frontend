@@ -11,7 +11,7 @@ import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
 import styles from "../../styles/pages/TasksPage.module.css";
 
 const TasksPage = () => {
-  const { tasks, hasLoaded } = useFetchTasks();
+  const { tasks, hasLoaded } = useFetchTasks(false);
   const { groupBy, sortBy, order } = useTaskFilters();
 
   // Apply grouping & sorting logic
@@ -61,7 +61,7 @@ const TasksPage = () => {
                               {task.priority}
                             </span>
                             <span className={styles.TaskDueDate}>
-                              {task.due_date || "N/A"}
+                              Due Date: {task.due_date || "N/A"}
                             </span>
                           </Card.Text>
                         </Card.Body>

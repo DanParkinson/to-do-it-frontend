@@ -153,3 +153,12 @@
         font-size: 0.75rem;
     }
 }
+
+@media (max-width: 426px) {
+
+    .TaskStatus,
+    .TaskPriority,
+    .TaskCategory {
+        display: none;
+    }
+}

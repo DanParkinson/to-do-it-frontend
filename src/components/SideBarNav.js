@@ -63,6 +63,18 @@ const SidebarNav = () => {
             </ListGroup.Item>
           </OverlayTrigger>
 
+          <OverlayTrigger
+            placement="right"
+            overlay={renderTooltip("Completed Tasks")}
+          >
+            <ListGroup.Item
+              className={iconStyles.ListGroupItem}
+              onClick={() => history.push("/tasks/completed")}
+            >
+              <i className="fa-solid fa-box-archive"></i>
+            </ListGroup.Item>
+          </OverlayTrigger>
+
           <OverlayTrigger placement="right" overlay={renderTooltip("New Task")}>
             <ListGroup.Item
               className={iconStyles.ListGroupItem}

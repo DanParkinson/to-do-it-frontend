@@ -98,14 +98,6 @@ function TaskPage() {
           </p>
         </Col>
       </Row>
-
-      {/* Action Buttons (Edit & Delete) */}
-      <Row className={styles.ButtonRow}>
-        <Col className={styles.ButtonCol}>
-          <Button className={btnStyles.PrimaryButton}>Edit</Button>
-          <Button className={btnStyles.DeleteButton}>Delete</Button>
-        </Col>
-      </Row>
     </Container>
   );
 }
