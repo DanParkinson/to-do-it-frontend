@@ -40,7 +40,7 @@ function TaskPage() {
           <Button
             variant="link"
             className={btnStyles.BackIcon}
-            onClick={() => history.push("/tasks")}
+            onClick={() => window.history.back()}
           >
             <i className="fa-regular fa-circle-left"></i>
           </Button>
@@ -101,7 +101,7 @@ function TaskPage() {
 
       {/* Action Buttons (Edit & Delete) */}
       <Row className={styles.ButtonRow}>
-        <Col>
+        <Col className={styles.ButtonCol}>
           <Button className={btnStyles.PrimaryButton}>Edit</Button>
           <Button className={btnStyles.DeleteButton}>Delete</Button>
         </Col>

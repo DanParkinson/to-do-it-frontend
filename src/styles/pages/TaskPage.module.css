@@ -42,6 +42,8 @@
 .DescriptionRow {
     width: 100%;
     margin-bottom: 1rem;
+    background-color: var(--color-surface);
+    border-radius: 10px;
 }
 
 .DescriptionCol {
@@ -50,6 +52,7 @@
 }
 
 .DescriptionText {
+    text-align: center;
     font-size: 1rem;
     line-height: 1.5;
     color: var(--text-secondary);
@@ -57,10 +60,14 @@
 
 /* Task Details Section */
 .DetailsRow {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    background-color: var(--color-surface);
 }
 
 .DetailsCol {
@@ -83,6 +90,8 @@
 
 /* Buttons */
 .ButtonRow {
+    padding-right: 2px;
+    padding-left: 0px;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -90,6 +99,10 @@
     text-align: center;
     margin-top: 1rem;
     max-width: 600px;
+}
+
+.ButtonCol {
+    padding-left: 0px;
 }
 
 /* Responsive Design */
@@ -104,6 +117,7 @@
         margin-bottom: 0;
     }
     .TimeRow {
+        margin-top: 1rem;
         margin-bottom: 0;
         max-height: 6rem;
     }
@@ -118,13 +132,22 @@
 }
 
 /* Responsive Design */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 426px) {
     .Title {
         font-size: 1rem;
     }
 
     .DescriptionText {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+    }
+
+    .DetailsCol p {
+        font-size: 0.8rem;
+    }
+
+    .TimeCol p {
+        font-size: 0.8rem;
+        text-align: center;
     }
 
     .DetailsCol {

@@ -1,0 +1,64 @@
+@import "../../App.module.css";
+
+.FilterDropdown {
+    color: var(--color-text-primary);
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 5px;
+    max-height: 2rem;
+    margin-right: 10px;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.FilterDropdown:hover,
+.FilterDropdown:focus,
+.FilterDropdown:active,
+.FilterDropdown.show {
+    background-color: var(--color-accent) !important;
+    color: var(--color-text-primary);
+    border: none;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.FilterMenu {
+    min-width: 220px;
+    padding: 10px;
+    background-color: var(--color-secondary-surface);
+}
+
+.RadioOption {
+    color: var(--color-text-primary);
+    margin-left: 10px;
+    font-size: 0.9rem;
+    gap: 20px;
+}
+
+.RadioOption input[type="radio"] {
+    margin-left: auto;
+    accent-color: var(--color-accent);
+}
+
+.ApplyButton {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    background-color: var(--color-primary);
+    color: var(--color-text-primary);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.ApplyButton:hover,
+.ApplyButton:focus,
+.ApplyButton:active,
+.ApplyButton.show {
+    background-color: var(--color-accent) !important;
+    color: var(--color-text-primary);
+    border: none;
+    outline: none;
+    box-shadow: none !important;
+}

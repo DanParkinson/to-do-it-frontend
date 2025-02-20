@@ -16,7 +16,6 @@ const CategoryPage = () => {
       try {
         // Step 1: Fetch Category
         const { data: categoryData } = await axiosReq.get(`/categories/${id}/`);
-        // console.log("Fetched category data:", categoryData);
         setCategory(categoryData);
 
         // Step 2: Fetch Tasks using task_ids
@@ -24,7 +23,6 @@ const CategoryPage = () => {
           const { data: taskData } = await axiosReq.get(
             `/tasks/?ids=${categoryData.task_ids.join(",")}`
           );
-          // console.log("Fetched tasks:", taskData.results);
           setTasks(taskData.results);
         } else {
           setTasks([]); // No tasks in this category
