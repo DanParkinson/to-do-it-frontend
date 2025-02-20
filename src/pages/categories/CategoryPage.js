@@ -4,6 +4,8 @@ import { Container, Col, Row, Card, Button } from "react-bootstrap";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchCategory from "../../hooks/useFetchCategory";
+import { useTaskFilters } from "../../context/TaskFilterContext";
+import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
 import { truncateText } from "../../utils/textUtils";
 
 import styles from "../../styles/pages/CategoryPage.module.css";
@@ -12,6 +14,13 @@ import btnStyles from "../../styles/general/Button.module.css";
 const CategoryPage = () => {
   const { id } = useParams();
   const { category, tasks, hasLoaded } = useFetchCategory(id);
+  const { groupBy, sortBy, order } = useTaskFilters();
+
+  // Apply grouping & sorting logic
+  const groupedTasks = groupTasks(tasks, groupBy).map(({ group, tasks }) => ({
+    group,
+    tasks: [...tasks].sort((a, b) => sortTasks(a, b, sortBy, order)), // Sort tasks inside groups
+  }));
 
   return (
     <Container fluid className={styles.CategoryContainer}>
@@ -52,44 +61,51 @@ const CategoryPage = () => {
           </Row>
 
           {/* Tasks List */}
-          <h2 className={styles.TaskHeading}>Tasks in this Category</h2>
-          <Row className={styles.TaskRow}>
-            {tasks.length > 0 ? (
-              tasks.map((task) => (
-                <Col
-                  key={task.id}
-                  lg={4}
-                  md={6}
-                  xs={12}
-                  className={styles.TaskCol}
-                >
-                  <NavLink to={`/tasks/${task.id}`} className={styles.TaskLink}>
-                    <Card className={styles.TaskCard}>
-                      <Card.Body className={styles.TaskCardBody}>
-                        <Card.Title className={styles.TaskTitle}>
-                          {truncateText(task.title, 15)}
-                        </Card.Title>
-                        <Card.Text className={styles.TaskDetails}>
-                          <span className={styles.TaskStatus}>
-                            {" "}
-                            {task.status}
-                          </span>
-                          <span className={styles.TaskPriority}>
-                            {task.priority}
-                          </span>
-                          <span className={styles.TaskDueDate}>
-                            {task.due_date || "N/A"}
-                          </span>
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </NavLink>
-                </Col>
-              ))
-            ) : (
-              <p className={styles.NoTasks}>No tasks in this category.</p>
-            )}
-          </Row>
+          {tasks.length === 0 ? (
+            <p className={styles.NoTasks}>No tasks in this category.</p>
+          ) : (
+            groupedTasks.map(({ group, tasks }) => (
+              <div key={group} className={styles.GroupContainer}>
+                <h2 className={styles.GroupHeading}>{group}</h2>
+                <Row className={styles.TaskRow}>
+                  {tasks.map((task) => (
+                    <Col
+                      key={task.id}
+                      lg={4}
+                      md={6}
+                      xs={12}
+                      className={styles.TaskCol}
+                    >
+                      <NavLink
+                        to={`/tasks/${task.id}`}
+                        className={styles.TaskLink}
+                      >
+                        <Card className={styles.TaskCard}>
+                          <Card.Body className={styles.TaskCardBody}>
+                            <Card.Title className={styles.TaskTitle}>
+                              {truncateText(task.title, 15)}
+                            </Card.Title>
+                            <Card.Text className={styles.TaskDetails}>
+                              <span className={styles.TaskStatus}>
+                                {" "}
+                                {task.status}
+                              </span>
+                              <span className={styles.TaskPriority}>
+                                {task.priority}
+                              </span>
+                              <span className={styles.TaskDueDate}>
+                                {task.due_date || "N/A"}
+                              </span>
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </NavLink>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            ))
+          )}
 
           {/* Action Buttons */}
           <Row className={styles.ButtonRow}>
