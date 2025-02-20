@@ -6,90 +6,19 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchTasks from "../../hooks/useFetchTasks";
 import { useTaskFilters } from "../../context/TaskFilterContext";
 import { truncateText } from "../../utils/textUtils";
+import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
 
 import styles from "../../styles/pages/TasksPage.module.css";
 
-// **Predefined order for grouping**
-const GROUP_PRIORITY_ORDER = ["High", "Medium", "Low"];
-const GROUP_STATUS_ORDER = ["Overdue", "Pending", "In Progress", "Completed"];
-const GROUP_DUE_DATE_ORDER = [
-  "Within a Week",
-  "Within a Month",
-  "Later",
-  "No Due Date",
-];
-
 const TasksPage = () => {
   const { tasks, hasLoaded } = useFetchTasks();
-  const { groupBy } = useTaskFilters();
+  const { groupBy, sortBy, order } = useTaskFilters();
 
-  // Function to group tasks
-  const groupTasks = (tasks, groupBy) => {
-    if (!tasks) return [];
-
-    if (groupBy === "None") {
-      return [{ group: "All Tasks", tasks }];
-    }
-
-    const groupedTasks = tasks.reduce((groups, task) => {
-      let key;
-      if (groupBy === "Status") key = task.status;
-      else if (groupBy === "Priority") key = task.priority;
-      else if (groupBy === "Due Date") key = getDueDateGroup(task.due_date);
-      else key = "Other";
-
-      if (!groups[key]) groups[key] = [];
-      groups[key].push(task);
-      return groups;
-    }, {});
-
-    // Convert object to array format for rendering
-    let groupedArray = Object.entries(groupedTasks).map(([group, tasks]) => ({
-      group,
-      tasks,
-    }));
-
-    // **Sort groups based on predefined order**
-    if (groupBy === "Status") {
-      groupedArray.sort(
-        (a, b) =>
-          GROUP_STATUS_ORDER.indexOf(a.group) -
-          GROUP_STATUS_ORDER.indexOf(b.group)
-      );
-    } else if (groupBy === "Priority") {
-      groupedArray.sort(
-        (a, b) =>
-          GROUP_PRIORITY_ORDER.indexOf(a.group) -
-          GROUP_PRIORITY_ORDER.indexOf(b.group)
-      );
-    } else if (groupBy === "Due Date") {
-      groupedArray.sort(
-        (a, b) =>
-          GROUP_DUE_DATE_ORDER.indexOf(a.group) -
-          GROUP_DUE_DATE_ORDER.indexOf(b.group)
-      );
-    }
-
-    return groupedArray;
-  };
-
-  // Helper function for due date grouping
-  const getDueDateGroup = (dueDate) => {
-    if (!dueDate) return "No Due Date";
-    const due = new Date(dueDate);
-    const now = new Date();
-    const oneWeek = new Date(now);
-    oneWeek.setDate(now.getDate() + 7);
-    const oneMonth = new Date(now);
-    oneMonth.setMonth(now.getMonth() + 1);
-
-    if (due <= oneWeek) return "Within a Week";
-    if (due <= oneMonth) return "Within a Month";
-    return "Later";
-  };
-
-  // Apply grouping logic
-  const groupedTasks = groupTasks(tasks, groupBy);
+  // Apply grouping & sorting logic
+  const groupedTasks = groupTasks(tasks, groupBy).map(({ group, tasks }) => ({
+    group,
+    tasks: [...tasks].sort((a, b) => sortTasks(a, b, sortBy, order)), // Sort tasks inside groups
+  }));
 
   return (
     <Container fluid className={styles.TaskContainer}>

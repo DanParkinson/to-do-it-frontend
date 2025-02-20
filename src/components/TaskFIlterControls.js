@@ -86,9 +86,6 @@ const TaskFilterControls = () => {
 
         {/* Apply & Reset Buttons */}
         <div className={styles.ButtonContainer}>
-          <Button className={styles.ApplyButton} onClick={handleApply}>
-            Apply
-          </Button>
           <Button className={styles.ApplyButton} onClick={handleReset}>
             Reset Filters
           </Button>
