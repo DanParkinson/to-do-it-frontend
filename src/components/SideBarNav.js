@@ -36,12 +36,6 @@ const SidebarNav = () => {
       {/* Top Section - Main Navigation */}
       <div className={styles.SideBarTop}>
         <ListGroup>
-          <OverlayTrigger placement="right" overlay={renderTooltip("Home")}>
-            <ListGroup.Item className={iconStyles.ListGroupItem}>
-              <i className="fa-solid fa-house"></i>
-            </ListGroup.Item>
-          </OverlayTrigger>
-
           <OverlayTrigger
             placement="right"
             overlay={renderTooltip("Categories")}
@@ -63,13 +57,10 @@ const SidebarNav = () => {
             </ListGroup.Item>
           </OverlayTrigger>
 
-          <OverlayTrigger
-            placement="right"
-            overlay={renderTooltip("Completed Tasks")}
-          >
+          <OverlayTrigger placement="right" overlay={renderTooltip("Archive")}>
             <ListGroup.Item
               className={iconStyles.ListGroupItem}
-              onClick={() => history.push("/tasks/completed")}
+              onClick={() => history.push("/archive")}
             >
               <i className="fa-solid fa-box-archive"></i>
             </ListGroup.Item>

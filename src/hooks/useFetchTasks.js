@@ -9,7 +9,7 @@ const useFetchTasks = (completed = false) => {
     const fetchTasks = async () => {
       setHasLoaded(false);
       try {
-        const endpoint = completed ? "/tasks/completed/" : "/tasks/";
+        const endpoint = completed ? "/archive" : "/tasks/";
         const { data } = await axiosReq.get(endpoint);
         setTasks(data.results);
       } catch (err) {

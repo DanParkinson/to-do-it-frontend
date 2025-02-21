@@ -58,7 +58,7 @@ function App() {
 
               <Route
                 exact
-                path="/tasks/completed"
+                path="/archive"
                 render={() => <CompletedTasksPage />}
               />
 
