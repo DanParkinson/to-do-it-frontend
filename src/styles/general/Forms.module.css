@@ -10,7 +10,7 @@
 }
 
 .FormGroup {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 /* Input Fields */
@@ -18,6 +18,7 @@
     background-color: #E0E0E0;
     width: 100%;
     padding: 10px;
+    height:50px;
     font-size: 1rem;
     border: 1px solid var(--color-formborder);
     border-radius: 5px;

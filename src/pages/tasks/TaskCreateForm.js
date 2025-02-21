@@ -76,161 +76,138 @@ function TaskCreateForm() {
     <Container fluid className={styles.MainContainer}>
       <Form onSubmit={handleSubmit}>
         {/* Heading - Always at the top */}
-        <Row className={styles.RowHeading}>
-          <Col lg={6} className={styles.ColHeading}>
-            <h1 className={styles.Heading}>Create a Task</h1>
-          </Col>
-          <Col
-            lg={6}
-            className={`d-none d-lg-block ${styles.ColHeading}`}
-          ></Col>
-        </Row>
-
+        <h1 className={formStyles.FormTitle}>Create a Task</h1>
         {/* Title & Options - Side by side on large screens, stacked on small screens */}
-        <Row className={styles.RowContent}>
-          <Col lg={6} md={6} className={styles.ColTitle}>
-            <Form.Group controlId="title" className={formStyles.FormGroup}>
-              <Form.Label className="d-none">Title</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Title"
-                value={title}
-                onChange={handleChange}
-                name="title"
-                className={formStyles.FormControl}
-              />
-            </Form.Group>
-            {errors?.title?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
+        <Form.Group controlId="title" className={formStyles.FormGroup}>
+          <Form.Label className="d-none">Title</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={handleChange}
+            name="title"
+            className={formStyles.FormControl}
+          />
+        </Form.Group>
+        {errors?.title?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
 
-            <Form.Group
-              controlId="description"
-              className={formStyles.FormGroup}
-            >
-              <Form.Label className="d-none">Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={4}
-                placeholder="Description"
-                value={description}
-                onChange={handleChange}
-                name="description"
-                className={formStyles.FormControl}
-              />
-            </Form.Group>
-            {errors?.description?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
-          </Col>
-          <Col lg={6} md={6} className={styles.ColOptions}>
-            <Form.Group controlId="category" className={formStyles.FormGroup}>
-              <Form.Label className="d-none">Category</Form.Label>
-              <Form.Control
-                as="select"
-                value={category}
-                onChange={handleChange}
-                name="category"
-                className={formStyles.FormControl}
-              >
-                <option value="">Select a Category</option>
-                {!hasLoaded ? (
-                  <option disabled>Loading categories...</option>
-                ) : categories.length > 0 ? (
-                  categories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))
-                ) : (
-                  <option disabled>You need to create a category first!</option>
-                )}
-              </Form.Control>
-            </Form.Group>
-            {errors?.category?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
+        <Form.Group controlId="description" className={formStyles.FormGroup}>
+          <Form.Label className="d-none">Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={4}
+            placeholder="Description"
+            value={description}
+            onChange={handleChange}
+            name="description"
+            className={formStyles.FormControl}
+          />
+        </Form.Group>
+        {errors?.description?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+        <Form.Group controlId="category" className={formStyles.FormGroup}>
+          <Form.Label className="d-none">Category</Form.Label>
+          <Form.Control
+            as="select"
+            value={category}
+            onChange={handleChange}
+            name="category"
+            className={formStyles.FormControl}
+          >
+            <option value="">Select a Category</option>
+            {!hasLoaded ? (
+              <option disabled>Loading categories...</option>
+            ) : categories.length > 0 ? (
+              categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))
+            ) : (
+              <option disabled>You need to create a category first!</option>
+            )}
+          </Form.Control>
+        </Form.Group>
+        {errors?.category?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
 
-            {/* Due Date */}
-            <Form.Group controlId="due_date" className={formStyles.FormGroup}>
-              <Form.Label className="d-none">Due Date</Form.Label>
-              <Form.Control
-                type="date"
-                placeholder="Due Date"
-                value={due_date}
-                onChange={handleChange}
-                name="due_date"
-                className={formStyles.FormControl}
-              />
-            </Form.Group>
-            {errors?.due_date?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
+        {/* Due Date */}
+        <Form.Group controlId="due_date" className={formStyles.FormGroup}>
+          <Form.Label className="d-none">Due Date</Form.Label>
+          <Form.Control
+            type="date"
+            placeholder="Due Date"
+            value={due_date}
+            onChange={handleChange}
+            name="due_date"
+            className={formStyles.FormControl}
+          />
+        </Form.Group>
+        {errors?.due_date?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
 
-            {/* Status */}
-            <Form.Group controlId="status" className={formStyles.FormGroup}>
-              <Form.Label className="d-none">Status</Form.Label>
-              <Form.Control
-                as="select"
-                value={status}
-                onChange={handleChange}
-                name="status"
-                className={formStyles.FormControl}
-              >
-                <option value="">Select a Status</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-                <option value="Overdue">Overdue</option>
-              </Form.Control>
-            </Form.Group>
-            {errors?.status?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
+        {/* Status */}
+        <Form.Group controlId="status" className={formStyles.FormGroup}>
+          <Form.Label className="d-none">Status</Form.Label>
+          <Form.Control
+            as="select"
+            value={status}
+            onChange={handleChange}
+            name="status"
+            className={formStyles.FormControl}
+          >
+            <option value="">Select a Status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Overdue">Overdue</option>
+          </Form.Control>
+        </Form.Group>
+        {errors?.status?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
 
-            {/* Priority */}
-            <Form.Group controlId="priority" className={formStyles.FormGroup}>
-              <Form.Label className="d-none">Priority</Form.Label>
-              <Form.Control
-                as="select"
-                value={priority}
-                onChange={handleChange}
-                name="priority"
-                className={formStyles.FormControl}
-              >
-                <option value="">Select a Priority</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </Form.Control>
-            </Form.Group>
-            {errors?.priority?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
-          </Col>
-        </Row>
+        {/* Priority */}
+        <Form.Group controlId="priority" className={formStyles.FormGroup}>
+          <Form.Label className="d-none">Priority</Form.Label>
+          <Form.Control
+            as="select"
+            value={priority}
+            onChange={handleChange}
+            name="priority"
+            className={formStyles.FormControl}
+          >
+            <option value="">Select a Priority</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </Form.Control>
+        </Form.Group>
+        {errors?.priority?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
 
-        {/* Button - Always at the bottom */}
-        <Row className={styles.RowButton}>
-          <Col className={styles.ColButton}>
-            {/* Submit Button */}
-            <Button type="submit" className={btnStyles.PrimaryButton}>
-              Create Task
-            </Button>
-          </Col>
-        </Row>
+        {/* Submit Button */}
+        <Button type="submit" className={btnStyles.PrimaryButton}>
+          Create Task
+        </Button>
       </Form>
     </Container>
   );
