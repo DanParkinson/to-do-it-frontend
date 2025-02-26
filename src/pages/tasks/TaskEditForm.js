@@ -16,11 +16,13 @@ import formStyles from "../../styles/general/Forms.module.css";
 
 import { axiosReq } from "../../api/axiosDefaults";
 import useFetchCategories from "../../hooks/useFetchCategories";
+import { useRefreshCategories } from "../../context/CategoryContext";
 
 function TaskEditForm() {
   const { id } = useParams();
   const history = useHistory();
   const { categories, hasLoaded: categoriesLoaded } = useFetchCategories();
+  const refreshCategories = useRefreshCategories();
 
   const [taskData, setTaskData] = useState({
     title: "",
@@ -29,6 +31,7 @@ function TaskEditForm() {
     due_date: "",
     priority: "",
     status: "",
+    is_archived: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -47,6 +50,7 @@ function TaskEditForm() {
           due_date: data.due_date || "",
           priority: data.priority,
           status: data.status,
+          is_archived: data.is_archived,
         });
       } catch (err) {
         console.error("Error fetching task:", err);
@@ -67,6 +71,7 @@ function TaskEditForm() {
   // **Handle Form Submission with Validation**
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const isArchived = status === "Completed";
     setIsSubmitting(true);
     setErrors({});
 
@@ -77,9 +82,11 @@ function TaskEditForm() {
     formData.append("due_date", due_date);
     formData.append("priority", priority);
     formData.append("status", status);
+    formData.append("is_archived", isArchived.toString());
 
     try {
       await axiosReq.put(`/tasks/${id}/`, formData);
+      refreshCategories();
       history.push(`/tasks/${id}`);
     } catch (err) {
       if (err.response?.status === 400) {

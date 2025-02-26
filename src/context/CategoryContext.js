@@ -5,10 +5,12 @@ import { useCurrentUser } from "./CurrentUserContext";
 // Create context for category state
 export const CategoryContext = createContext();
 export const SetCategoryContext = createContext();
+export const RefreshCategoryContext = createContext();
 
 // Custom hooks to access the category list and setter function
 export const useCategories = () => useContext(CategoryContext);
 export const useSetCategories = () => useContext(SetCategoryContext);
+export const useRefreshCategories = () => useContext(RefreshCategoryContext);
 
 export const CategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState(null);
@@ -18,7 +20,7 @@ export const CategoryProvider = ({ children }) => {
    * Fetch the user's categories on component mount.
    * If the user has categories, store them in state.
    */
-  const handleMount = async () => {
+  const fetchCategories = async () => {
     if (!currentUser) {
       setCategories(null);
       return;
@@ -35,13 +37,15 @@ export const CategoryProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    handleMount();
+    fetchCategories();
   }, [currentUser]);
 
   return (
     <CategoryContext.Provider value={categories}>
       <SetCategoryContext.Provider value={setCategories}>
-        {children}
+        <RefreshCategoryContext.Provider value={fetchCategories}>
+          {children}
+        </RefreshCategoryContext.Provider>
       </SetCategoryContext.Provider>
     </CategoryContext.Provider>
   );

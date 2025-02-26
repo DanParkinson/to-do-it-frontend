@@ -87,6 +87,12 @@ const CategoryPage = () => {
                                 Due Date: {task.due_date || "N/A"}
                               </span>
                             </Card.Text>
+                            <NavLink
+                              to={`/tasks/${task.id}/edit`}
+                              className={btnStyles.EditButton}
+                            >
+                              <i class="fa-solid fa-pen-to-square"></i>
+                            </NavLink>
                           </Card.Body>
                         </Card>
                       </NavLink>

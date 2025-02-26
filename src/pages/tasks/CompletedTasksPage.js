@@ -1,11 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Card, Container, Row, Col, Button } from "react-bootstrap";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchTasks from "../../hooks/useFetchTasks";
 import { truncateText } from "../../utils/textUtils";
+
 import styles from "../../styles/pages/TasksPage.module.css";
+import btnStyles from "../../styles/general/Button.module.css";
 
 const CompletedTasksPage = () => {
   // Fetch archived (completed) tasks using the "archive" flag
@@ -40,6 +42,12 @@ const CompletedTasksPage = () => {
                         {task.due_date || "N/A"}
                       </span>
                     </Card.Text>
+                    <NavLink
+                      to={`/tasks/${task.id}/edit`}
+                      className={btnStyles.EditButton}
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </NavLink>
                   </Card.Body>
                 </Card>
               </NavLink>
