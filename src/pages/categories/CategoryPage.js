@@ -7,14 +7,23 @@ import useFetchCategory from "../../hooks/useFetchCategory";
 import { useTaskFilters } from "../../context/TaskFilterContext";
 import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
 import { truncateText } from "../../utils/textUtils";
+import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
+import useTaskDeletion from "../../hooks/useTaskDeletion";
 
 import styles from "../../styles/pages/CategoryPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const CategoryPage = () => {
   const { id } = useParams();
-  const { category, tasks, hasLoaded } = useFetchCategory(id);
+  const { category, tasks, hasLoaded, refreshCategory } = useFetchCategory(id);
   const { groupBy, sortBy, order } = useTaskFilters();
+  const {
+    showDeleteModal,
+    taskToDelete,
+    setShowDeleteModal,
+    handleDeleteClick,
+    handleConfirmDelete,
+  } = useTaskDeletion(refreshCategory);
 
   // Apply grouping & sorting logic
   const groupedTasks = groupTasks(tasks, groupBy).map(({ group, tasks }) => ({
@@ -28,6 +37,14 @@ const CategoryPage = () => {
         <LoadingIndicator spinner message="Loading category..." />
       ) : category ? (
         <>
+          {/* Delete Confirmation Modal */}
+          <DeleteConfirmationModal
+            show={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={handleConfirmDelete}
+            taskTitle={taskToDelete?.title}
+          />
+
           {/* Back Button */}
           <Row className={styles.BackButtonRow}>
             <Col className={styles.BackButtonCol}>
@@ -93,6 +110,12 @@ const CategoryPage = () => {
                             >
                               <i class="fa-solid fa-pen-to-square"></i>
                             </NavLink>
+                            <Button
+                              className={btnStyles.DeleteButton}
+                              onClick={(e) => handleDeleteClick(e, task)}
+                            >
+                              <i className="fa-solid fa-trash-can"></i>
+                            </Button>
                           </Card.Body>
                         </Card>
                       </NavLink>

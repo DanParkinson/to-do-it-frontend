@@ -8,8 +8,8 @@ import { useTaskFilters } from "../../context/TaskFilterContext";
 import { useRefreshCategories } from "../../context/CategoryContext";
 import { truncateText } from "../../utils/textUtils";
 import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
-import { axiosRes } from "../../api/axiosDefaults";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
+import useTaskDeletion from "../../hooks/useTaskDeletion"; //
 
 import styles from "../../styles/pages/TasksPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
@@ -19,35 +19,13 @@ const TasksPage = () => {
   const { tasks, hasLoaded, setTasks } = useFetchTasks(false);
   const { groupBy, sortBy, order } = useTaskFilters();
   const refreshCategories = useRefreshCategories();
-
-  // State to control delete modal
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [taskToDelete, setTaskToDelete] = useState(null);
-
-  // Open the delete confirmation modal
-  const handleDeleteClick = (e, task) => {
-    e.preventDefault();
-    setTaskToDelete(task);
-    setShowDeleteModal(true);
-  };
-
-  // Handle confirmed delete action
-  const handleConfirmDelete = async () => {
-    if (!taskToDelete) return;
-
-    try {
-      await axiosRes.delete(`/tasks/${taskToDelete.id}/`);
-      setTasks((prevTasks) =>
-        prevTasks.filter((t) => t.id !== taskToDelete.id)
-      );
-      refreshCategories();
-    } catch (err) {
-      console.error("Error deleting task:", err);
-    } finally {
-      setShowDeleteModal(false);
-      setTaskToDelete(null);
-    }
-  };
+  const {
+    showDeleteModal,
+    taskToDelete,
+    setShowDeleteModal,
+    handleDeleteClick,
+    handleConfirmDelete,
+  } = useTaskDeletion(setTasks);
 
   // Apply grouping & sorting logic
   const groupedTasks = groupTasks(tasks, groupBy).map(({ group, tasks }) => ({
