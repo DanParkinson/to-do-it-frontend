@@ -47,7 +47,7 @@
     text-decoration: none !important;
 }
 
-
+.DeleteButton,
 .BackIcon,
 .EditButton {
     display: flex;
@@ -63,6 +63,7 @@
     padding: 0;
 }
 
+.DeleteButton:hover,
 .BackIcon:hover,
 .EditButton:hover {
     color: var(--color-accent);
@@ -71,6 +72,8 @@
     fill: none;
 }
 
+.DeleteButton:focus,
+.DeleteButton:active,
 .BackIcon:focus,
 .BackIcon:active,
 .EditButton:focus,

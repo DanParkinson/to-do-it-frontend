@@ -22,7 +22,7 @@ const useFetchTasks = (completed = false) => {
     fetchTasks();
   }, [completed]);
 
-  return { tasks, hasLoaded };
+  return { tasks, hasLoaded, setTasks };
 };
 
 export default useFetchTasks;

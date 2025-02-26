@@ -1,20 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { Card, Container, Row, Col, Button } from "react-bootstrap";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchTasks from "../../hooks/useFetchTasks";
 import { useTaskFilters } from "../../context/TaskFilterContext";
+import { useRefreshCategories } from "../../context/CategoryContext";
 import { truncateText } from "../../utils/textUtils";
 import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
+import { axiosRes } from "../../api/axiosDefaults";
+import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 
 import styles from "../../styles/pages/TasksPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const TasksPage = () => {
   const history = useHistory();
-  const { tasks, hasLoaded } = useFetchTasks(false);
+  const { tasks, hasLoaded, setTasks } = useFetchTasks(false);
   const { groupBy, sortBy, order } = useTaskFilters();
+  const refreshCategories = useRefreshCategories();
+
+  // State to control delete modal
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
+
+  // Open the delete confirmation modal
+  const handleDeleteClick = (e, task) => {
+    e.preventDefault();
+    setTaskToDelete(task);
+    setShowDeleteModal(true);
+  };
+
+  // Handle confirmed delete action
+  const handleConfirmDelete = async () => {
+    if (!taskToDelete) return;
+
+    try {
+      await axiosRes.delete(`/tasks/${taskToDelete.id}/`);
+      setTasks((prevTasks) =>
+        prevTasks.filter((t) => t.id !== taskToDelete.id)
+      );
+      refreshCategories();
+    } catch (err) {
+      console.error("Error deleting task:", err);
+    } finally {
+      setShowDeleteModal(false);
+      setTaskToDelete(null);
+    }
+  };
 
   // Apply grouping & sorting logic
   const groupedTasks = groupTasks(tasks, groupBy).map(({ group, tasks }) => ({
@@ -28,6 +61,14 @@ const TasksPage = () => {
         <LoadingIndicator spinner message="Loading tasks..." />
       ) : (
         <>
+          {/* Delete Confirmation Modal */}
+          <DeleteConfirmationModal
+            show={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={handleConfirmDelete}
+            taskTitle={taskToDelete?.title}
+          />
+
           {groupedTasks.map(({ group, tasks }) => (
             <div key={group} className={styles.GroupContainer}>
               <h2 className={styles.GroupHeading}>{group}</h2>
@@ -74,6 +115,13 @@ const TasksPage = () => {
                             }}
                           >
                             <i class="fa-solid fa-pen-to-square"></i>
+                          </Button>
+
+                          <Button
+                            className={btnStyles.DeleteButton}
+                            onClick={(e) => handleDeleteClick(e, task)}
+                          >
+                            <i className="fa-solid fa-trash-can"></i>
                           </Button>
                         </Card.Body>
                       </Card>
