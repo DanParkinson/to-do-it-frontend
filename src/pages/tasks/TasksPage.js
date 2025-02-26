@@ -1,6 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { NavLink, useHistory } from "react-router-dom";
+import { Card, Container, Row, Col, Button } from "react-bootstrap";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchTasks from "../../hooks/useFetchTasks";
@@ -9,8 +9,10 @@ import { truncateText } from "../../utils/textUtils";
 import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
 
 import styles from "../../styles/pages/TasksPage.module.css";
+import btnStyles from "../../styles/general/Button.module.css";
 
 const TasksPage = () => {
+  const history = useHistory();
   const { tasks, hasLoaded } = useFetchTasks(false);
   const { groupBy, sortBy, order } = useTaskFilters();
 
@@ -64,6 +66,15 @@ const TasksPage = () => {
                               Due Date: {task.due_date || "N/A"}
                             </span>
                           </Card.Text>
+                          <Button
+                            className={btnStyles.EditButton}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              history.push(`/tasks/${task.id}/edit`);
+                            }}
+                          >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                          </Button>
                         </Card.Body>
                       </Card>
                     </NavLink>

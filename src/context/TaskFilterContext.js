@@ -14,6 +14,7 @@ export const TaskFilterProvider = ({ children }) => {
     groupBy: "None", // Grouping: None, Status, Priority, Due Date
     sortBy: "Title", // Sorting: Title, Priority, Due Date
     order: "Ascending", // Order: Ascending, Descending
+    searchQuery: "", // Add Search Query to Filters
   });
 
   // Function to update filters

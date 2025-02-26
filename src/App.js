@@ -8,6 +8,7 @@ import styles from "./App.module.css";
 // Pages
 import SignInForm from "./pages/auth/SignInForm";
 import TaskCreateForm from "./pages/tasks/TaskCreateForm";
+import TaskEditForm from "./pages/tasks/TaskEditForm";
 import CategoryCreateForm from "./pages/categories/CategoryCreateForm";
 import TaskPage from "./pages/tasks/TaskPage";
 import CategoryPage from "./pages/categories/CategoryPage";
@@ -46,6 +47,12 @@ function App() {
                 exact
                 path="/tasks/create"
                 render={() => <TaskCreateForm />}
+              />
+
+              <Route
+                exact
+                path="/tasks/:id/edit"
+                render={() => <TaskEditForm />}
               />
 
               <Route
