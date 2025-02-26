@@ -1,15 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { NavLink, useHistory } from "react-router-dom";
+import { Card, Container, Row, Col, Button } from "react-bootstrap";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchCategories from "../../hooks/useFetchCategories";
 import { truncateText } from "../../utils/textUtils";
 
 import styles from "../../styles/pages/CategoriesPage.module.css";
+import btnStyles from "../../styles/general/Button.module.css";
 
 const CategoriesPage = () => {
   const { categories, hasLoaded } = useFetchCategories();
+  const history = useHistory();
 
   return (
     <Container fluid className={styles.CategoryContainer}>
@@ -41,6 +43,15 @@ const CategoriesPage = () => {
                         Tasks: {category.task_count}
                       </span>
                     </Card.Text>
+                    <Button
+                      className={btnStyles.EditButton}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push(`/categories/${category.id}/edit`);
+                      }}
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </Button>
                   </Card.Body>
                 </Card>
               </NavLink>

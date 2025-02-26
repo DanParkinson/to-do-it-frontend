@@ -19,6 +19,7 @@ import CompletedTasksPage from "./pages/tasks/CompletedTasksPage";
 // Context
 import { useCurrentUser } from "./context/CurrentUserContext";
 import CategoriesPage from "./pages/categories/CategoriesPage";
+import CategoryEditForm from "./pages/categories/CategoryEditForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -59,6 +60,12 @@ function App() {
                 exact
                 path="/categories/create"
                 render={() => <CategoryCreateForm />}
+              />
+
+              <Route
+                exact
+                path="/categories/:id/edit"
+                render={() => <CategoryEditForm />}
               />
 
               <Route exact path="/tasks/:id" render={() => <TaskPage />} />
