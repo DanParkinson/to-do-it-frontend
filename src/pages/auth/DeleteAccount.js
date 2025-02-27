@@ -30,11 +30,15 @@ const DeleteAccount = () => {
 
     try {
       await axiosReq.delete("/delete-account/");
+
+      localStorage.removeItem("authToken");
+      sessionStorage.removeItem("authToken");
+
       setSuccessMessage("Your account has been deleted.");
 
       setTimeout(() => {
         setCurrentUser(null);
-        history.push("/");
+        history.push("/signin");
       }, 2000);
     } catch (err) {
       console.error("Error deleting account:", err.response?.data);

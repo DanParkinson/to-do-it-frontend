@@ -26,6 +26,7 @@ export const CurrentUserProvider = ({ children }) => {
       setCurrentUser(data);
     } catch (err) {
       console.log("API ERROR:", err);
+      setCurrentUser(null);
     }
   };
 
