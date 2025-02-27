@@ -50,6 +50,20 @@ const CompletedTasksPage = () => {
               >
                 <NavLink to={`/tasks/${task.id}`} className={styles.TaskLink}>
                   <Card className={styles.TaskCard}>
+                    <div className={styles.ButtonContainer}>
+                      <NavLink
+                        to={`/tasks/${task.id}/edit`}
+                        className={btnStyles.EditButton}
+                      >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </NavLink>
+                      <Button
+                        className={btnStyles.DeleteButton}
+                        onClick={(e) => handleDeleteClick(e, task)}
+                      >
+                        <i className="fa-solid fa-trash-can"></i>
+                      </Button>
+                    </div>
                     <Card.Body className={styles.TaskCardBody}>
                       <Card.Title className={styles.TaskTitle}>
                         {truncateText(task.title, 15)}
@@ -65,20 +79,6 @@ const CompletedTasksPage = () => {
                           {task.due_date || "N/A"}
                         </span>
                       </Card.Text>
-                      <Row className={styles.ButtonRow}>
-                        <NavLink
-                          to={`/tasks/${task.id}/edit`}
-                          className={btnStyles.EditButton}
-                        >
-                          <i class="fa-solid fa-pen-to-square"></i>
-                        </NavLink>
-                        <Button
-                          className={btnStyles.DeleteButton}
-                          onClick={(e) => handleDeleteClick(e, task)}
-                        >
-                          <i className="fa-solid fa-trash-can"></i>
-                        </Button>
-                      </Row>
                     </Card.Body>
                   </Card>
                 </NavLink>

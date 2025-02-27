@@ -172,16 +172,13 @@
     cursor: pointer;
 }
 
-.ButtonRow {
-    width: 100%;
-    padding-right: 2px;
-    padding-left: 0px;
+.ButtonContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 1rem;
-    max-width: 600px;
+    gap: 15px;
+    margin-right: 10px;
 }
 
 .ButtonCol {

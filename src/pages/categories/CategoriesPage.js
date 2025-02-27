@@ -44,6 +44,26 @@ const CategoriesPage = () => {
                 className={styles.CategoryLink}
               >
                 <Card className={styles.CategoryCard}>
+                  {category.name !== "Uncategorized" && (
+                    <div className={styles.ButtonContainer}>
+                      <Button
+                        className={btnStyles.EditButton}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          history.push(`/categories/${category.id}/edit`);
+                        }}
+                      >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </Button>
+
+                      <Button
+                        className={btnStyles.DeleteButton}
+                        onClick={(e) => handleDeleteClick(e, category)}
+                      >
+                        <i className="fa-solid fa-trash-can"></i>
+                      </Button>
+                    </div>
+                  )}
                   <Card.Body className={styles.CategoryCardBody}>
                     <Card.Title className={styles.CategoryTitle}>
                       {truncateText(category.name, 20)}
@@ -53,26 +73,6 @@ const CategoriesPage = () => {
                         Tasks: {category.task_count}
                       </span>
                     </Card.Text>
-                    {category.name !== "Uncategorized" && (
-                      <Row className={styles.ButtonRow}>
-                        <Button
-                          className={btnStyles.EditButton}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            history.push(`/categories/${category.id}/edit`);
-                          }}
-                        >
-                          <i class="fa-solid fa-pen-to-square"></i>
-                        </Button>
-
-                        <Button
-                          className={btnStyles.DeleteButton}
-                          onClick={(e) => handleDeleteClick(e, category)}
-                        >
-                          <i className="fa-solid fa-trash-can"></i>
-                        </Button>
-                      </Row>
-                    )}
                   </Card.Body>
                 </Card>
               </NavLink>

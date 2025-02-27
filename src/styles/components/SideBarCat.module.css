@@ -1,6 +1,16 @@
+@import "../../App.module.css";
+
 .CategoryList {
     width: 100%;
 
+}
+
+.ActiveCategory,
+.ActiveTask {
+    font-weight: bold;
+    background-color: var(--color-secondary-surface) !important;
+    color: var(--color-accent) !important;
+    border-radius: 5px;
 }
 
 .CategoryItem {

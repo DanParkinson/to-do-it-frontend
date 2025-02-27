@@ -55,7 +55,7 @@
     background: none;
     border: none;
     color: var(--primary-text);
-    font-size: 1.5rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: color 0.2s ease-in-out;
     padding: 0;
@@ -89,13 +89,15 @@
 
     .EditButton,
     .DeleteButton {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 426px) {
+
+    
     .EditButton,
     .DeleteButton {
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 }

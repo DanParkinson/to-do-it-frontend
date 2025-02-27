@@ -71,6 +71,29 @@ const TasksPage = () => {
                     >
                       <Card className={styles.TaskCard}>
                         <Card.Body className={styles.TaskCardBody}>
+                          {/* Button Container Positioned to the Top Right */}
+                          <div className={styles.ButtonContainer}>
+                            <Button
+                              className={btnStyles.EditButton}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                history.push(`/tasks/${task.id}/edit`);
+                              }}
+                            >
+                              <i className="fa-solid fa-pen-to-square"></i>
+                            </Button>
+
+                            <Button
+                              className={btnStyles.DeleteButton}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleDeleteClick(e, task);
+                              }}
+                            >
+                              <i className="fa-solid fa-trash-can"></i>
+                            </Button>
+                          </div>
+
                           <Card.Title className={styles.TaskTitle}>
                             {truncateText(task.title, 15)}
                           </Card.Title>
@@ -90,27 +113,6 @@ const TasksPage = () => {
                               Due Date: {task.due_date || "N/A"}
                             </span>
                           </Card.Text>
-                          <Row className={styles.ButtonRow}>
-                            <Button
-                              className={btnStyles.EditButton}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                history.push(`/tasks/${task.id}/edit`);
-                              }}
-                            >
-                              <i class="fa-solid fa-pen-to-square"></i>
-                            </Button>
-
-                            <Button
-                              className={btnStyles.DeleteButton}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                handleDeleteClick(e, task);
-                              }}
-                            >
-                              <i className="fa-solid fa-trash-can"></i>
-                            </Button>
-                          </Row>
                         </Card.Body>
                       </Card>
                     </NavLink>

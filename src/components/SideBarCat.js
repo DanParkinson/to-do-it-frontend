@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { ListGroup, Button, Collapse } from "react-bootstrap";
 
 import useToggle from "../hooks/useToggle";
@@ -10,70 +10,98 @@ import LoadingIndicator from "./LoadingIndicator";
 import styles from "../styles/components/SideBarCat.module.css";
 import btnStyles from "../styles/general/Button.module.css";
 
-// This produces a list of the users categories
-// All categories loaded as links
-// Categories have use of expand toggle to show task lists
-
-const SideBarCat = () => {
+const SideBarCat = ({ location }) => {
   const categories = useCategories();
   const { expandedItems, toggleItem } = useToggle();
   const categoryTaskMap = useCategoryTaskMap(categories);
 
-  // users will always have a category 'uncategorised' so will never be perpetual
   if (categories === null) {
     return <LoadingIndicator spinner message="Loading categories..." />;
   }
 
   return (
     <ListGroup className={styles.CategoryList}>
-      {categories.map((category) => (
-        <div key={category.id}>
-          <ListGroup.Item className={styles.CategoryItem}>
-            <Button
-              variant="link"
-              onClick={() => {
-                toggleItem(category.id);
-              }}
-              className={btnStyles.ToggleButton}
-            >
-              {expandedItems.includes(category.id) ? "-" : "+"}
-            </Button>
+      {categories.map((category) => {
+        // Check if the category is currently active
+        const isActiveCategory =
+          location.pathname === `/categories/${category.id}`;
+        const isExpanded = expandedItems.includes(category.id);
 
-            <NavLink
-              to={`/categories/${category.id}`}
-              className={styles.CategoryLink}
+        return (
+          <div key={category.id}>
+            <ListGroup.Item
+              className={`${styles.CategoryItem} ${
+                isActiveCategory ? styles.ActiveCategory : ""
+              }`}
             >
-              {category.name}
-            </NavLink>
-          </ListGroup.Item>
+              {/* Expand/Collapse Button */}
+              <Button
+                variant="link"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleItem(category.id);
+                }}
+                className={btnStyles.ToggleButton}
+              >
+                {isExpanded ? "-" : "+"}
+              </Button>
 
-          {/* Task List */}
-          <Collapse in={expandedItems.includes(category.id)}>
-            <div>
-              <ListGroup className={styles.TaskList}>
-                {category.task_ids.length > 0 ? (
-                  categoryTaskMap[category.id]?.map((task) => (
-                    <ListGroup.Item key={task.id} className={styles.TaskItem}>
-                      <NavLink
-                        to={`/tasks/${task.id}`}
-                        className={styles.TaskLink}
-                      >
-                        {task.title}
-                      </NavLink>
+              {/* Clicking category name now navigates and expands */}
+              <NavLink
+                to={`/categories/${category.id}`}
+                className={`${styles.CategoryLink} ${
+                  isActiveCategory ? styles.ActiveCategory : ""
+                }`}
+                onClick={() => {
+                  toggleItem(category.id); // Expand when clicking category name
+                }}
+              >
+                {category.name}
+              </NavLink>
+            </ListGroup.Item>
+
+            {/* Task List */}
+            <Collapse in={isExpanded}>
+              <div>
+                <ListGroup className={styles.TaskList}>
+                  {category.task_ids.length > 0 ? (
+                    categoryTaskMap[category.id]?.map((task) => {
+                      // Check if the task is currently active
+                      const isActiveTask =
+                        location.pathname === `/tasks/${task.id}`;
+
+                      return (
+                        <ListGroup.Item
+                          key={task.id}
+                          className={`${styles.TaskItem} ${
+                            isActiveTask ? styles.ActiveTask : ""
+                          }`}
+                        >
+                          <NavLink
+                            to={`/tasks/${task.id}`}
+                            className={`${styles.TaskLink} ${
+                              isActiveTask ? styles.ActiveTask : ""
+                            }`}
+                          >
+                            {task.title}
+                          </NavLink>
+                        </ListGroup.Item>
+                      );
+                    })
+                  ) : (
+                    <ListGroup.Item className={styles.TaskItem}>
+                      No tasks in this category.
                     </ListGroup.Item>
-                  ))
-                ) : (
-                  <ListGroup.Item className={styles.TaskItem}>
-                    No tasks in this category.
-                  </ListGroup.Item>
-                )}
-              </ListGroup>
-            </div>
-          </Collapse>
-        </div>
-      ))}
+                  )}
+                </ListGroup>
+              </div>
+            </Collapse>
+          </div>
+        );
+      })}
     </ListGroup>
   );
 };
 
-export default SideBarCat;
+// Use withRouter to access location in React Router v4
+export default withRouter(SideBarCat);
