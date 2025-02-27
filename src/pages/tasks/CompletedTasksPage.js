@@ -13,7 +13,7 @@ import btnStyles from "../../styles/general/Button.module.css";
 
 const CompletedTasksPage = () => {
   // Fetch archived (completed) tasks using the "archive" flag
-  const { tasks, hasLoaded, setTasks } = useFetchTasks("archive");
+  const { tasks, hasLoaded, setTasks } = useFetchTasks(true);
   const {
     showDeleteModal,
     taskToDelete,

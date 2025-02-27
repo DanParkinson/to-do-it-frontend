@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { CurrentUserProvider } from "./context/CurrentUserContext";
 import { CategoryProvider } from "./context/CategoryContext";
 import { TaskFilterProvider } from "./context/TaskFilterContext";
+import { SearchProvider } from "./context/SearchContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +15,9 @@ ReactDOM.render(
       <CurrentUserProvider>
         <TaskFilterProvider>
           <CategoryProvider>
-            <App />
+            <SearchProvider>
+              <App />
+            </SearchProvider>
           </CategoryProvider>
         </TaskFilterProvider>
       </CurrentUserProvider>
