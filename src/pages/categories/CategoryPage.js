@@ -9,11 +9,13 @@ import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
 import { truncateText } from "../../utils/textUtils";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import useTaskDeletion from "../../hooks/useTaskDeletion";
+import { useRedirect } from "../../hooks/useRedirect";
 
 import styles from "../../styles/pages/CategoryPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const CategoryPage = () => {
+  useRedirect("loggedOut");
   const { id } = useParams();
   const { category, tasks, hasLoaded, refreshCategory } = useFetchCategory(id);
   const { groupBy, sortBy, order } = useTaskFilters();

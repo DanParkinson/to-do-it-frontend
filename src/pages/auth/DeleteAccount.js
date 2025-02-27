@@ -3,11 +3,13 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useHistory } from "react-router-dom";
 import { useSetCurrentUser } from "../../context/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 import styles from "../../styles/pages/DeleteAccount.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const DeleteAccount = () => {
+  useRedirect("loggedOut");
   const history = useHistory();
   const setCurrentUser = useSetCurrentUser();
   const [confirmation, setConfirmation] = useState("");

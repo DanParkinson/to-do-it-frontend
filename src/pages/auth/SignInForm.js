@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { Form, Button, Container, Alert } from "react-bootstrap";
@@ -7,6 +8,7 @@ import btnStyles from "../../styles/general/Button.module.css";
 import formStyles from "../../styles/general/Forms.module.css";
 
 import { useSetCurrentUser } from "../../context/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function SignInForm({ toggleForm }) {
   const setCurrentUser = useSetCurrentUser();
@@ -16,6 +18,8 @@ function SignInForm({ toggleForm }) {
   });
   const { username, password } = signInData;
   const [errors, setErrors] = useState({});
+  const history = useHistory();
+  useRedirect("loggedIn");
 
   const handleChange = (event) => {
     setSignInData({
@@ -29,6 +33,7 @@ function SignInForm({ toggleForm }) {
     try {
       const res = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(res.data.user);
+      history.goBack();
     } catch (err) {
       console.error("SignInForm - Error response:", err.response?.data);
       setErrors(err.response?.data);

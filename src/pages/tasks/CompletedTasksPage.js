@@ -10,8 +10,10 @@ import useTaskDeletion from "../../hooks/useTaskDeletion";
 
 import styles from "../../styles/pages/TasksPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const CompletedTasksPage = () => {
+  useRedirect("loggedOut");
   // Fetch archived (completed) tasks using the "archive" flag
   const { tasks, hasLoaded, setTasks } = useFetchTasks(true);
   const {

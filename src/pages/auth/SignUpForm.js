@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { Form, Button, Container, Alert } from "react-bootstrap";
 import styles from "../../styles/pages/SignInUpForm.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 import formStyles from "../../styles/general/Forms.module.css";
+
+import { useRedirect } from "../../hooks/useRedirect";
 
 function SignUpForm({ toggleForm }) {
   const [signUpData, setSignUpData] = useState({
@@ -13,6 +16,8 @@ function SignUpForm({ toggleForm }) {
   });
   const { username, password1, password2 } = signUpData;
   const [errors, setErrors] = useState({});
+  const history = useHistory();
+  useRedirect("loggedIn");
 
   const handleChange = (event) => {
     setSignUpData({

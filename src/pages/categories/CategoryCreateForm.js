@@ -12,8 +12,10 @@ import formStyles from "../../styles/general/Forms.module.css";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useSetCategories } from "../../context/CategoryContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function CategoryCreateForm() {
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
   const [categoryData, setCategoryData] = useState({
     name: "",

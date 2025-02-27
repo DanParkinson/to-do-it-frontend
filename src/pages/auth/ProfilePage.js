@@ -4,11 +4,13 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 
 import useFetchProfile from "../../hooks/useFetchProfile";
 import LoadingIndicator from "../../components/LoadingIndicator";
+import { useRedirect } from "../../hooks/useRedirect";
 
 import styles from "../../styles/pages/ProfilePage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const ProfilePage = () => {
+  useRedirect("loggedOut");
   const { id } = useParams();
   const history = useHistory();
   const { profile, hasLoaded } = useFetchProfile(id);

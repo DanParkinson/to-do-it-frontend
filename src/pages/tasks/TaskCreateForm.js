@@ -13,8 +13,10 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useSetCategories } from "../../context/CategoryContext";
 import useFetchCategories from "../../hooks/useFetchCategories";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function TaskCreateForm() {
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
   const { categories, hasLoaded } = useFetchCategories();
 

@@ -13,11 +13,13 @@ import {
 import styles from "../../styles/pages/TaskCreateEditForm.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 import formStyles from "../../styles/general/Forms.module.css";
+import { useRedirect } from "../../hooks/useRedirect";
 
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRefreshCategories } from "../../context/CategoryContext";
 
 function CategoryEditForm() {
+  useRedirect("loggedOut");
   const { id } = useParams();
   const history = useHistory();
   const refreshCategories = useRefreshCategories();

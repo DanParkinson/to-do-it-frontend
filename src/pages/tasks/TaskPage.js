@@ -5,11 +5,13 @@ import { axiosReq } from "../../api/axiosDefaults";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import useTaskDeletion from "../../hooks/useTaskDeletion"; //
+import { useRedirect } from "../../hooks/useRedirect";
 
 import styles from "../../styles/pages/TaskPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 function TaskPage() {
+  useRedirect("loggedOut");
   const { id } = useParams();
   const history = useHistory();
   const [task, setTask] = useState(null);

@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useHistory } from "react-router-dom";
+import { useRedirect } from "../../hooks/useRedirect";
 
 import styles from "../../styles/pages/ChangePassword.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const ChangePassword = () => {
+  useRedirect("loggedOut");
   const history = useHistory();
   const [formData, setFormData] = useState({
     old_password: "",

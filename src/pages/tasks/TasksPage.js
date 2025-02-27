@@ -9,12 +9,14 @@ import { useRefreshCategories } from "../../context/CategoryContext";
 import { truncateText } from "../../utils/textUtils";
 import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
-import useTaskDeletion from "../../hooks/useTaskDeletion"; //
+import useTaskDeletion from "../../hooks/useTaskDeletion";
+import { useRedirect } from "../../hooks/useRedirect";
 
 import styles from "../../styles/pages/TasksPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const TasksPage = () => {
+  useRedirect("loggedOut");
   const history = useHistory();
   const { tasks, hasLoaded, setTasks } = useFetchTasks(false);
   const { groupBy, sortBy, order } = useTaskFilters();

@@ -17,8 +17,10 @@ import formStyles from "../../styles/general/Forms.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import useFetchCategories from "../../hooks/useFetchCategories";
 import { useRefreshCategories } from "../../context/CategoryContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function TaskEditForm() {
+  useRedirect("loggedOut");
   const { id } = useParams();
   const history = useHistory();
   const { categories, hasLoaded: categoriesLoaded } = useFetchCategories();

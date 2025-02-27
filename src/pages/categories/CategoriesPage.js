@@ -10,8 +10,10 @@ import { useCategories } from "../../context/CategoryContext";
 
 import styles from "../../styles/pages/CategoriesPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const CategoriesPage = () => {
+  useRedirect("loggedOut");
   const categories = useCategories();
   const hasLoaded = categories !== null;
   const history = useHistory();
