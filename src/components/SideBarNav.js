@@ -96,7 +96,12 @@ const SidebarNav = () => {
             placement="right"
             overlay={renderTooltip(`${currentUser?.username}'s Profile`)}
           >
-            <ListGroup.Item className={iconStyles.ListGroupItem}>
+            <ListGroup.Item
+              className={iconStyles.ListGroupItem}
+              onClick={() =>
+                history.push(`/profiles/${currentUser?.profile_id}`)
+              }
+            >
               <i className="fa-solid fa-user"></i>
             </ListGroup.Item>
           </OverlayTrigger>

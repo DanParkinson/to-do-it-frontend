@@ -20,6 +20,9 @@ import CompletedTasksPage from "./pages/tasks/CompletedTasksPage";
 import { useCurrentUser } from "./context/CurrentUserContext";
 import CategoriesPage from "./pages/categories/CategoriesPage";
 import CategoryEditForm from "./pages/categories/CategoryEditForm";
+import ProfilePage from "./pages/auth/ProfilePage";
+import ChangePassword from "./pages/auth/ChangePassword";
+import DeleteAccount from "./pages/auth/DeleteAccount";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -86,6 +89,22 @@ function App() {
                 exact
                 path="/categories"
                 render={() => <CategoriesPage />}
+              />
+              <Route
+                exact
+                path="/profiles/:id"
+                render={() => <ProfilePage />}
+              />
+
+              <Route
+                exact
+                path="/change-password"
+                render={() => <ChangePassword />}
+              />
+              <Route
+                exact
+                path="/delete-account"
+                render={() => <DeleteAccount />}
               />
 
               <Route render={() => <h1>Page Not Found</h1>} />

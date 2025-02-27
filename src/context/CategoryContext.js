@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from "./CurrentUserContext";
+import { useSearch } from "./SearchContext";
 
 // Create context for category state
 export const CategoryContext = createContext();
@@ -17,6 +18,7 @@ export const useRemoveCategory = () => useContext(RemoveCategoryContext);
 export const CategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState(null);
   const currentUser = useCurrentUser();
+  const searchQuery = useSearch();
 
   /**
    * Fetch the user's categories on component mount.
@@ -29,6 +31,10 @@ export const CategoryProvider = ({ children }) => {
     }
 
     try {
+      let endpoint = "/categories/";
+      if (searchQuery) {
+        endpoint += `?search=${encodeURIComponent(searchQuery)}`;
+      }
       const { data } = await axiosReq.get("/categories/");
       setCategories(data.results);
     } catch (err) {
@@ -40,7 +46,7 @@ export const CategoryProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCategories();
-  }, [currentUser]);
+  }, [currentUser, searchQuery]);
 
   const removeCategory = (categoryId) => {
     setCategories((prevCategories) =>
