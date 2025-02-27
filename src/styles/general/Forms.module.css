@@ -10,7 +10,7 @@
 }
 
 .FormGroup {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 /* Input Fields */
@@ -36,11 +36,12 @@
     outline: none;
 }
 
-@media (max-width: 426px) {
+@media (max-width: 768px) {
     .FormControl {
         height: 35px;
         font-size: 1rem;
-        }
+    }
+
     .FormGroup {
         margin-bottom: 1rem;
     }

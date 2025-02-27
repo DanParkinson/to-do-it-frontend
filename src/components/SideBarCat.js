@@ -6,6 +6,7 @@ import useToggle from "../hooks/useToggle";
 import useCategoryTaskMap from "../hooks/useCategoryTaskMap";
 import { useCategories } from "../context/CategoryContext";
 import LoadingIndicator from "./LoadingIndicator";
+import { truncateText } from "../utils/textUtils";
 
 import styles from "../styles/components/SideBarCat.module.css";
 import btnStyles from "../styles/general/Button.module.css";
@@ -56,7 +57,7 @@ const SideBarCat = ({ location }) => {
                   toggleItem(category.id); // Expand when clicking category name
                 }}
               >
-                {category.name}
+                {truncateText(category.name, 30)}
               </NavLink>
             </ListGroup.Item>
 
@@ -83,7 +84,7 @@ const SideBarCat = ({ location }) => {
                               isActiveTask ? styles.ActiveTask : ""
                             }`}
                           >
-                            {task.title}
+                            {truncateText(task.title, 15)}
                           </NavLink>
                         </ListGroup.Item>
                       );

@@ -3,6 +3,8 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import LoadingIndicator from "../../components/LoadingIndicator";
+import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
+import useTaskDeletion from "../../hooks/useTaskDeletion"; //
 
 import styles from "../../styles/pages/TaskPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
@@ -12,6 +14,14 @@ function TaskPage() {
   const history = useHistory();
   const [task, setTask] = useState(null);
   const [hasLoaded, setHasLoaded] = useState(false);
+
+  const {
+    showDeleteModal,
+    taskToDelete,
+    setShowDeleteModal,
+    handleDeleteClick,
+    handleConfirmDelete,
+  } = useTaskDeletion(() => history.push("/tasks"));
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -34,36 +44,46 @@ function TaskPage() {
 
   return (
     <Container fluid className={styles.TaskContainer}>
-      {/* Back Button */}
-      <Row className={styles.BackButtonRow}>
+      {/* Header Row (Back Button, Edit & Delete Buttons) */}
+      <Row className={styles.HeaderRow}>
         <Col className={styles.BackButtonCol}>
           <Button
             variant="link"
             className={btnStyles.BackIcon}
-            onClick={() => window.history.back()}
+            onClick={() => history.goBack()}
           >
             <i className="fa-regular fa-circle-left"></i>
+          </Button>
+        </Col>
+
+        <Col className={styles.ActionButtonsCol}>
+          <Button
+            className={btnStyles.EditButton}
+            onClick={() => history.push(`/tasks/${task.id}/edit`)}
+          >
+            <i className="fa-solid fa-pen-to-square"></i>
+          </Button>
+
+          <Button
+            className={btnStyles.DeleteButton}
+            onClick={(e) => {
+              e.preventDefault();
+              handleDeleteClick(e, task);
+            }}
+          >
+            <i className="fa-solid fa-trash-can"></i>
           </Button>
         </Col>
       </Row>
 
       {/* Task Title */}
       <Row className={styles.TitleRow}>
-        <Col className={styles.TitleCol}>
+        <Col>
           <h1 className={styles.Title}>{task.title}</h1>
         </Col>
       </Row>
 
-      {/* Task Description */}
-      <Row className={styles.DescriptionRow}>
-        <Col className={styles.DescriptionCol}>
-          <p className={styles.DescriptionText}>
-            {task.description || "No description provided."}
-          </p>
-        </Col>
-      </Row>
-
-      {/* Task Details (Category, Status, Priority, Due Date) */}
+      {/* Task Details */}
       <Row className={styles.DetailsRow}>
         <Col className={styles.DetailsCol}>
           <p>
@@ -87,6 +107,16 @@ function TaskPage() {
         </Col>
       </Row>
 
+      {/* Task Description */}
+      <Row className={styles.DescriptionRow}>
+        <Col className={styles.DescriptionCol}>
+          <h3>Description</h3>
+          <p className={styles.DescriptionText}>
+            {task.description || "No description provided."}
+          </p>
+        </Col>
+      </Row>
+
       {/* Created At & Updated At */}
       <Row className={styles.TimeRow}>
         <Col className={styles.TimeCol}>
@@ -98,6 +128,13 @@ function TaskPage() {
           </p>
         </Col>
       </Row>
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleConfirmDelete}
+        taskTitle={taskToDelete?.title}
+      />
     </Container>
   );
 }

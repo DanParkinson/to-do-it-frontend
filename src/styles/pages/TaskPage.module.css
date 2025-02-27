@@ -1,161 +1,151 @@
-@import "../../App.module.css";
-
 /* Task Page Container */
 .TaskContainer {
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 100%;
-    height: 95%;
-    padding: 20px;
-    padding-top: 0;
-}
-
-/* Task Title Section */
-.TitleRow {
-    width: 100%;
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.BackButtonCol {
-    padding:0;
-    margin:0;
-    margin-right: auto;
-}
-
-.TitleCol {
-    width: 100%;
-}
-
-.Title {
-    font-size: 2rem;
-    text-transform: capitalize;
-    font-weight: bold;
-    margin: 0.5rem 0;
-    color: var(--text-primary);
-}
-
-/* Task Description */
-.DescriptionRow {
-    width: 100%;
-    margin-bottom: 1rem;
+    max-width: 900px;
+    height: 80vh;
     background-color: var(--color-surface);
     border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.DescriptionCol {
-    padding: 10px;
-    border-radius: 8px;
+
+/* Header Row */
+.HeaderRow {
+    margin-top: 10px;;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.DescriptionText {
+/* Back Button (Left-Aligned) */
+.BackButtonCol {
+    flex: 1;
+    text-align: left;
+}
+
+/* Action Buttons (Right-Aligned) */
+.ActionButtonsCol {
+    flex: 1;
+    text-align: right;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* Task Title */
+.Title {
+    font-size: 2rem;
+    font-weight: bold;
     text-align: center;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
+    margin-bottom: 10px;
 }
 
-/* Task Details Section */
+/* Task Details Grid */
 .DetailsRow {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    border-radius: 10px;
-    background-color: var(--color-surface);
+    padding: 5px 0;
+    gap: 5px;
 }
 
 .DetailsCol {
     flex: 1;
-    padding: 10px;
+    min-width: 180px;
+    padding: 5px;
     border-radius: 8px;
-    margin: 5px;
+    background: var(--color-light-gray);
+    margin: 3px;
+    text-align: center;
 }
 
-/* Created & Updated Section */
+/* Task Description */
+.DescriptionRow {
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+.DescriptionCol {
+    background: var(--color-light-gray);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Time Information */
 .TimeRow {
-    width: 100%;
-    margin-bottom: 1rem;
+    margin-top: 20px;
+    text-align: center;
 }
 
 .TimeCol {
-    padding: 10px;
-    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
 }
 
-/* Buttons */
-.ButtonRow {
-    padding-right: 2px;
-    padding-left: 0px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 1rem;
-    max-width: 600px;
-}
-
-.ButtonCol {
-    padding-left: 0px;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 992px) {
-    .TitleRow {
-        margin-bottom: 0;
-    }
-    .DescriptionRow {
-        margin-bottom: 0;
-    }
-    .DetailsRow {
-        margin-bottom: 0;
-    }
-    .TimeRow {
-        margin-top: 1rem;
-        margin-bottom: 0;
-        max-height: 6rem;
-    }
-    .TimeCol {
-        padding:0;
-    }
-    .TimeCol p {
-        margin-bottom: 0;
-    }
-     
-
-}
-
-/* Responsive Design */
-@media screen and (max-width: 426px) {
+/* Responsive Adjustments */
+@media (max-width: 768px) {
     .Title {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
+    .DetailsRow {
+        gap: 0px;;
+    }
+
+    .DetailsCol {
+        min-width: 140px;
+        font-size: 0.9rem;
+        margin-bottom: 0px;;
+    }
+
+    .DescriptionCol h3 {
+        font-size: 1.2rem;
+    }
+
+    .DescriptionRow {
+        margin-left: 0px;
+        margin-top: 0px;
+    }
     .DescriptionText {
         font-size: 0.8rem;
     }
 
-    .DetailsCol p {
+    .TimeCol {
+        padding: 0pc;;
+        margin-top: 0px;
         font-size: 0.8rem;
-    }
-
-    .TimeCol p {
-        font-size: 0.8rem;
-        text-align: center;
-    }
-
-    .DetailsCol {
-        padding-bottom: 0;
-        padding-top: 0;
-        margin-bottom: 0;
-        margin-top: 0;
-
     }
 }
 
+@media (max-width: 480px) {
+    .Title {
+        font-size: 1.2rem;
+    }
+
+    .DetailsCol {
+        min-width: 120px;
+        font-size: 0.75rem;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .DescriptionCol h3 {
+        font-size: 1rem;
+    }
+
+    .DescriptionRow {
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+
+    .DescriptionText {
+        font-size: 0.75rem;
+    }
+
+    .TimeCol {
+        margin-top: 0px;
+        font-size: 0.7rem;
+    }
+}

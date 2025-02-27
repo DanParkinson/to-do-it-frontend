@@ -82,7 +82,6 @@ function TaskEditForm() {
     formData.append("due_date", due_date);
     formData.append("priority", priority);
     formData.append("status", status);
-    formData.append("is_archived", isArchived.toString());
 
     try {
       await axiosReq.put(`/tasks/${id}/`, formData);
