@@ -6,11 +6,13 @@ import { useCurrentUser } from "./CurrentUserContext";
 export const CategoryContext = createContext();
 export const SetCategoryContext = createContext();
 export const RefreshCategoryContext = createContext();
+export const RemoveCategoryContext = createContext();
 
 // Custom hooks to access the category list and setter function
 export const useCategories = () => useContext(CategoryContext);
 export const useSetCategories = () => useContext(SetCategoryContext);
 export const useRefreshCategories = () => useContext(RefreshCategoryContext);
+export const useRemoveCategory = () => useContext(RemoveCategoryContext);
 
 export const CategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState(null);
@@ -40,11 +42,21 @@ export const CategoryProvider = ({ children }) => {
     fetchCategories();
   }, [currentUser]);
 
+  const removeCategory = (categoryId) => {
+    setCategories((prevCategories) =>
+      prevCategories
+        ? prevCategories.filter((cat) => cat.id !== categoryId)
+        : []
+    );
+  };
+
   return (
     <CategoryContext.Provider value={categories}>
       <SetCategoryContext.Provider value={setCategories}>
         <RefreshCategoryContext.Provider value={fetchCategories}>
-          {children}
+          <RemoveCategoryContext.Provider value={removeCategory}>
+            {children}
+          </RemoveCategoryContext.Provider>
         </RefreshCategoryContext.Provider>
       </SetCategoryContext.Provider>
     </CategoryContext.Provider>

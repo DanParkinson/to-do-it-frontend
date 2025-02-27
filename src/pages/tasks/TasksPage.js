@@ -37,6 +37,11 @@ const TasksPage = () => {
     <Container fluid className={styles.TaskContainer}>
       {!hasLoaded ? (
         <LoadingIndicator spinner message="Loading tasks..." />
+      ) : tasks.length === 0 ? (
+        <>
+          <h1 className={styles.Heading}>All Tasks</h1>
+          <p className={styles.NoTasks}>No tasks available.</p>
+        </>
       ) : (
         <>
           {/* Delete Confirmation Modal */}
@@ -85,22 +90,27 @@ const TasksPage = () => {
                               Due Date: {task.due_date || "N/A"}
                             </span>
                           </Card.Text>
-                          <Button
-                            className={btnStyles.EditButton}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              history.push(`/tasks/${task.id}/edit`);
-                            }}
-                          >
-                            <i class="fa-solid fa-pen-to-square"></i>
-                          </Button>
+                          <Row className={styles.ButtonRow}>
+                            <Button
+                              className={btnStyles.EditButton}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                history.push(`/tasks/${task.id}/edit`);
+                              }}
+                            >
+                              <i class="fa-solid fa-pen-to-square"></i>
+                            </Button>
 
-                          <Button
-                            className={btnStyles.DeleteButton}
-                            onClick={(e) => handleDeleteClick(e, task)}
-                          >
-                            <i className="fa-solid fa-trash-can"></i>
-                          </Button>
+                            <Button
+                              className={btnStyles.DeleteButton}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleDeleteClick(e, task);
+                              }}
+                            >
+                              <i className="fa-solid fa-trash-can"></i>
+                            </Button>
+                          </Row>
                         </Card.Body>
                       </Card>
                     </NavLink>

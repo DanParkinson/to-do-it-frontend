@@ -15,8 +15,8 @@
 }
 
 .Heading {
-    font-size: 2rem;
-    text-transform: capitalize;
+    font-size: 2rem !important;
+    text-transform: uppercase;
     padding-top: 1rem;
 }
 

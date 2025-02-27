@@ -65,18 +65,20 @@ const CompletedTasksPage = () => {
                           {task.due_date || "N/A"}
                         </span>
                       </Card.Text>
-                      <NavLink
-                        to={`/tasks/${task.id}/edit`}
-                        className={btnStyles.EditButton}
-                      >
-                        <i class="fa-solid fa-pen-to-square"></i>
-                      </NavLink>
-                      <Button
-                        className={btnStyles.DeleteButton}
-                        onClick={(e) => handleDeleteClick(e, task)}
-                      >
-                        <i className="fa-solid fa-trash-can"></i>
-                      </Button>
+                      <Row className={styles.ButtonRow}>
+                        <NavLink
+                          to={`/tasks/${task.id}/edit`}
+                          className={btnStyles.EditButton}
+                        >
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </NavLink>
+                        <Button
+                          className={btnStyles.DeleteButton}
+                          onClick={(e) => handleDeleteClick(e, task)}
+                        >
+                          <i className="fa-solid fa-trash-can"></i>
+                        </Button>
+                      </Row>
                     </Card.Body>
                   </Card>
                 </NavLink>

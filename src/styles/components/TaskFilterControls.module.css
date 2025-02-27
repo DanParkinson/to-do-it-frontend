@@ -1,5 +1,18 @@
 @import "../../App.module.css";
 
+/* Remove focus outline and box shadow from dropdown and form controls */
+.FilterDropdown:focus,
+.FilterDropdown:active,
+.FilterMenu:focus,
+.FilterMenu:active,
+.RadioOption input[type="radio"]:focus,
+.RadioOption input[type="radio"]:active,
+.ButtonContainer button:focus,
+.ButtonContainer button:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .FilterDropdown {
     color: var(--color-text-primary);
     background-color: var(--color-primary);

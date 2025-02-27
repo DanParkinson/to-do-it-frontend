@@ -199,6 +199,15 @@
     margin-top: 1rem;
 }
 
+.ButtonRow {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 8%;
+    padding-left: 5%;
+    margin-top: 0;;
+}
+
 /* Media Queries */
 @media (max-width: 992px) {
     .Title {

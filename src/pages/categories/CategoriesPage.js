@@ -3,15 +3,25 @@ import { NavLink, useHistory } from "react-router-dom";
 import { Card, Container, Row, Col, Button } from "react-bootstrap";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
-import useFetchCategories from "../../hooks/useFetchCategories";
 import { truncateText } from "../../utils/textUtils";
+import DeleteCategoryModal from "../../components/DeleteCategoryModal";
+import useCategoryDeletion from "../../hooks/useCategoryDeletion";
+import { useCategories } from "../../context/CategoryContext";
 
 import styles from "../../styles/pages/CategoriesPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const CategoriesPage = () => {
-  const { categories, hasLoaded } = useFetchCategories();
+  const categories = useCategories();
+  const hasLoaded = categories !== null;
   const history = useHistory();
+  const {
+    showDeleteModal,
+    categoryToDelete,
+    handleDeleteClick,
+    handleConfirmDelete,
+    setShowDeleteModal,
+  } = useCategoryDeletion();
 
   return (
     <Container fluid className={styles.CategoryContainer}>
@@ -43,15 +53,26 @@ const CategoriesPage = () => {
                         Tasks: {category.task_count}
                       </span>
                     </Card.Text>
-                    <Button
-                      className={btnStyles.EditButton}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        history.push(`/categories/${category.id}/edit`);
-                      }}
-                    >
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </Button>
+                    {category.name !== "Uncategorized" && (
+                      <Row className={styles.ButtonRow}>
+                        <Button
+                          className={btnStyles.EditButton}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            history.push(`/categories/${category.id}/edit`);
+                          }}
+                        >
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </Button>
+
+                        <Button
+                          className={btnStyles.DeleteButton}
+                          onClick={(e) => handleDeleteClick(e, category)}
+                        >
+                          <i className="fa-solid fa-trash-can"></i>
+                        </Button>
+                      </Row>
+                    )}
                   </Card.Body>
                 </Card>
               </NavLink>
@@ -59,6 +80,13 @@ const CategoriesPage = () => {
           ))}
         </Row>
       )}
+      {/* Delete Confirmation Modal */}
+      <DeleteCategoryModal
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleConfirmDelete}
+        categoryName={categoryToDelete?.name}
+      />
     </Container>
   );
 };

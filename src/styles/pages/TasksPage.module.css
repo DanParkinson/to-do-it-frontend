@@ -124,6 +124,14 @@
 
 }
 
+.ButtonRow {
+    width: 90%;
+    display: flex;
+    justify-content:flex-start;
+    gap: 8%;
+    padding-left: 5%;
+}
+
 
 
 @media (max-width: 992px) {
