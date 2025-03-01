@@ -45,11 +45,16 @@ function TaskEditForm() {
     const fetchTask = async () => {
       try {
         const { data } = await axiosReq.get(`/tasks/${id}/`);
+
+        const formattedDueDate = data.due_date
+          ? new Date(data.due_date).toISOString().split("T")[0] // Extract YYYY-MM-DD
+          : "";
+
         setTaskData({
           title: data.title,
           description: data.description,
           category: data.category,
-          due_date: data.due_date || "",
+          due_date: formattedDueDate || "",
           priority: data.priority,
           status: data.status,
           is_archived: data.is_archived,

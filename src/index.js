@@ -10,19 +10,17 @@ import { TaskFilterProvider } from "./context/TaskFilterContext";
 import { SearchProvider } from "./context/SearchContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <CurrentUserProvider>
-        <TaskFilterProvider>
-          <CategoryProvider>
-            <SearchProvider>
-              <App />
-            </SearchProvider>
-          </CategoryProvider>
-        </TaskFilterProvider>
-      </CurrentUserProvider>
-    </Router>
-  </React.StrictMode>,
+  <Router>
+    <CurrentUserProvider>
+      <TaskFilterProvider>
+        <CategoryProvider>
+          <SearchProvider>
+            <App />
+          </SearchProvider>
+        </CategoryProvider>
+      </TaskFilterProvider>
+    </CurrentUserProvider>
+  </Router>,
   document.getElementById("root")
 );
 
