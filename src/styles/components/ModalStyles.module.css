@@ -1,0 +1,35 @@
+/* Center modal text */
+.ModalBody {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* Consistent header */
+.ModalHeader {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Modal Title */
+.ModalTitle {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* Footer buttons are aligned properly */
+.ModalFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Reduce modal width on smaller screens */
+@media (max-width: 768px) {
+    .ModalTitle {
+        font-size: 1.1rem;
+    }
+
+    .ModalBody {
+        font-size: 0.9rem;
+    }
+}
