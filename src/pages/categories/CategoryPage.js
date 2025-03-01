@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useHistory } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -19,6 +19,7 @@ import styles from "../../styles/pages/CategoryPage.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
 
 const CategoryPage = () => {
+  const history = useHistory();
   useRedirect("loggedOut");
   const { id } = useParams();
   const { category, tasks, hasLoaded, refreshCategory } = useFetchCategory(id);
@@ -102,12 +103,15 @@ const CategoryPage = () => {
                       >
                         <Card className={styles.TaskCard}>
                           <div className={styles.ButtonContainer}>
-                            <NavLink
-                              to={`/tasks/${task.id}/edit`}
+                            <Button
                               className={btnStyles.EditButton}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                history.push(`/tasks/${task.id}/edit`);
+                              }}
                             >
-                              <i class="fa-solid fa-pen-to-square"></i>
-                            </NavLink>
+                              <i className="fa-solid fa-pen-to-square"></i>
+                            </Button>
                             <Button
                               className={btnStyles.DeleteButton}
                               onClick={(e) => handleDeleteClick(e, task)}

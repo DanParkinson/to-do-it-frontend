@@ -59,7 +59,7 @@ const CategoriesPage = () => {
                           history.push(`/categories/${category.id}/edit`);
                         }}
                       >
-                        <i class="fa-solid fa-pen-to-square"></i>
+                        <i className="fa-solid fa-pen-to-square"></i>
                       </Button>
 
                       <Button

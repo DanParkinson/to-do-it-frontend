@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -20,6 +20,7 @@ const CompletedTasksPage = () => {
   useRedirect("loggedOut");
   // Fetch archived (completed) tasks using the "archive" flag
   const { tasks, hasLoaded, setTasks } = useFetchTasks(true);
+  const history = useHistory();
   const {
     showDeleteModal,
     taskToDelete,
@@ -57,12 +58,15 @@ const CompletedTasksPage = () => {
                 <NavLink to={`/tasks/${task.id}`} className={styles.TaskLink}>
                   <Card className={styles.TaskCard}>
                     <div className={styles.ButtonContainer}>
-                      <NavLink
-                        to={`/tasks/${task.id}/edit`}
+                      <Button
                         className={btnStyles.EditButton}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          history.push(`/tasks/${task.id}/edit`);
+                        }}
                       >
-                        <i class="fa-solid fa-pen-to-square"></i>
-                      </NavLink>
+                        <i className="fa-solid fa-pen-to-square"></i>
+                      </Button>
                       <Button
                         className={btnStyles.DeleteButton}
                         onClick={(e) => handleDeleteClick(e, task)}
