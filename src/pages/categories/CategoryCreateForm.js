@@ -48,8 +48,8 @@ function CategoryCreateForm() {
 
       history.push(`/categories/${data.id}`);
     } catch (err) {
-      console.log("Error response status:", err.response?.status);
-      console.log("Error response data:", err.response?.data);
+      //console.log("Error response status:", err.response?.status);
+      //console.log("Error response data:", err.response?.data);
 
       if (err.response?.status === 400) {
         setErrors(err.response?.data);

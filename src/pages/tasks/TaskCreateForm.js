@@ -41,9 +41,6 @@ function TaskCreateForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    console.log("Selected Category:", category);
-
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
