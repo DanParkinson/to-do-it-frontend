@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "../styles/components/TopBar.module.css";
 import SearchBar from "./SearchBar";
-import TaskFilerControls from "./TaskFilterControls";
+import TaskFilterControls from "./TaskFilterControls";
 
 const TopBar = () => {
   return (
     <header className={styles.TopBar}>
       <SearchBar placeholder="Search To-Do-It" />
-      <TaskFilerControls />
+      <TaskFilterControls />
     </header>
   );
 };
