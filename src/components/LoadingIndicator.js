@@ -1,5 +1,5 @@
 import React from "react";
-import Spinner from "react-bootstrap/spinner";
+import Spinner from "react-bootstrap/Spinner";
 import styles from "../styles/components/LoadingIndicator.module.css";
 
 const LoadingIndicator = ({ spinner, message }) => {
