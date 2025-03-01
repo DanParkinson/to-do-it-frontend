@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Dropdown, Button, Form } from "react-bootstrap";
+import React from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import styles from "../styles/components/TaskFilterControls.module.css";
 
 import {

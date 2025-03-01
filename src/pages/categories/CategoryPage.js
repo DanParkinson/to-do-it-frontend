@@ -1,6 +1,10 @@
 import React from "react";
 import { useParams, NavLink } from "react-router-dom";
-import { Container, Col, Row, Card, Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchCategory from "../../hooks/useFetchCategory";

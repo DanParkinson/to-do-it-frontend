@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { Card, Container, Row, Col, Button } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import useFetchTasks from "../../hooks/useFetchTasks";
 import { useTaskFilters } from "../../context/TaskFilterContext";
-import { useRefreshCategories } from "../../context/CategoryContext";
 import { truncateText } from "../../utils/textUtils";
 import { groupTasks, sortTasks } from "../../utils/taskGroupingAndSorting";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
@@ -20,7 +23,6 @@ const TasksPage = () => {
   const history = useHistory();
   const { tasks, hasLoaded, setTasks } = useFetchTasks(false);
   const { groupBy, sortBy, order } = useTaskFilters();
-  const refreshCategories = useRefreshCategories();
   const {
     showDeleteModal,
     taskToDelete,

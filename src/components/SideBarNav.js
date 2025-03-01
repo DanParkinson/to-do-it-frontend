@@ -1,5 +1,7 @@
 import React from "react";
-import { ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
+import ListGroup from "react-bootstrap/ListGroup";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -8,6 +10,7 @@ import { useSetCurrentUser } from "../context/CurrentUserContext";
 
 import styles from "../styles/components/SideBar.module.css";
 import iconStyles from "../styles/general/Icons.module.css";
+import { removeTokenTimestamp } from "../utils/Utils";
 
 const SidebarNav = () => {
   const history = useHistory();
@@ -18,6 +21,7 @@ const SidebarNav = () => {
     try {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
+      removeTokenTimestamp();
       history.push("/");
     } catch (err) {
       console.error("Error logging out:", err);

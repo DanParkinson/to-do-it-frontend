@@ -1,6 +1,9 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
-import { ListGroup, Button, Collapse } from "react-bootstrap";
+import NavLink from "react-router-dom/NavLink";
+import withRouter from "react-router-dom/withRouter";
+import ListGroup from "react-bootstrap/ListGroup";
+import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
 
 import useToggle from "../hooks/useToggle";
 import useCategoryTaskMap from "../hooks/useCategoryTaskMap";

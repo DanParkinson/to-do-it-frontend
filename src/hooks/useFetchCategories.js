@@ -10,18 +10,17 @@ const useFetchCategories = () => {
   const fetchCategories = useCallback(async () => {
     setHasLoaded(false);
     try {
-      let endpoint = "/categories/";
-      if (searchQuery) {
-        endpoint += `?search=${encodeURIComponent(searchQuery)}`;
-      }
-      const { data } = await axiosReq.get("/categories/");
+      const url = searchQuery
+        ? `/categories/?search=${encodeURIComponent(searchQuery)}`
+        : "/categories/";
+      const { data } = await axiosReq.get(url);
       setCategories(data.results);
     } catch (err) {
       console.error("Error fetching categories:", err);
     } finally {
       setHasLoaded(true);
     }
-  }, []);
+  }, [searchQuery]);
 
   // Run on mount
   useEffect(() => {

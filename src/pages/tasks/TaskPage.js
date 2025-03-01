@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 import { useParams, useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import LoadingIndicator from "../../components/LoadingIndicator";

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Col, Container, Row, Button } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import styles from "../styles/layouts/LandingLayout.module.css";
 
 // Import SignIn and SignUp Forms

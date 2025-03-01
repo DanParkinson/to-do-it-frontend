@@ -1,6 +1,9 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import useFetchProfile from "../../hooks/useFetchProfile";
 import LoadingIndicator from "../../components/LoadingIndicator";

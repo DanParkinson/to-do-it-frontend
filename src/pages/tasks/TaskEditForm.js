@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Alert,
-  Spinner,
-} from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Spinner from "react-bootstrap/Spinner";
 
 import styles from "../../styles/pages/TaskCreateEditForm.module.css";
 import btnStyles from "../../styles/general/Button.module.css";
@@ -78,7 +76,6 @@ function TaskEditForm() {
   // **Handle Form Submission with Validation**
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const isArchived = status === "Completed";
     setIsSubmitting(true);
     setErrors({});
 

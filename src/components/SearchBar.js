@@ -1,5 +1,6 @@
 import React from "react";
-import { InputGroup, FormControl } from "react-bootstrap";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
 import { useSetSearch } from "../context/SearchContext";
 import styles from "../styles/components/SearchBar.module.css";
 

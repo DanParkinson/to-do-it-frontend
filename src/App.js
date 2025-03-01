@@ -23,6 +23,7 @@ import CategoryEditForm from "./pages/categories/CategoryEditForm";
 import ProfilePage from "./pages/auth/ProfilePage";
 import ChangePassword from "./pages/auth/ChangePassword";
 import DeleteAccount from "./pages/auth/DeleteAccount";
+import NotFound from "./components/NotFound";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -107,7 +108,7 @@ function App() {
                 render={() => <DeleteAccount />}
               />
 
-              <Route render={() => <h1>Page Not Found</h1>} />
+              <Route component={NotFound} />
             </Switch>
           </MainLayout>
         )}

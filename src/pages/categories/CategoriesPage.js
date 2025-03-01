@@ -1,6 +1,10 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { Card, Container, Row, Col, Button } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import LoadingIndicator from "../../components/LoadingIndicator";
 import { truncateText } from "../../utils/textUtils";

@@ -1,0 +1,47 @@
+.NotFoundContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    text-align: center;
+    background-color: var(--color-surface);
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+.Content {
+    max-width: 500px;
+    padding: 20px;
+}
+
+.ErrorCode {
+    font-size: 5rem;
+    font-weight: bold;
+    color: var(--color-accent);
+}
+
+.ErrorMessage {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.ErrorDescription {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .ErrorCode {
+        font-size: 4rem;
+    }
+
+    .ErrorMessage {
+        font-size: 1.5rem;
+    }
+
+    .ErrorDescription {
+        font-size: 0.9rem;
+    }
+}

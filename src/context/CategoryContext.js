@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from "./CurrentUserContext";
 import { useSearch } from "./SearchContext";
@@ -24,37 +30,35 @@ export const CategoryProvider = ({ children }) => {
    * Fetch the user's categories on component mount.
    * If the user has categories, store them in state.
    */
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     if (!currentUser) {
       setCategories(null);
       return;
     }
 
     try {
-      let endpoint = "/categories/";
-      if (searchQuery) {
-        endpoint += `?search=${encodeURIComponent(searchQuery)}`;
-      }
-      const { data } = await axiosReq.get("/categories/");
+      const url = searchQuery
+        ? `/categories/?search=${encodeURIComponent(searchQuery)}`
+        : "/categories/";
+      const { data } = await axiosReq.get(url);
       setCategories(data.results);
     } catch (err) {
       console.error("CategoryProvider - API Error:", err);
       setCategories([]);
-    } finally {
     }
-  };
+  }, [currentUser, searchQuery]);
 
   useEffect(() => {
     fetchCategories();
-  }, [currentUser, searchQuery]);
+  }, [fetchCategories]);
 
-  const removeCategory = (categoryId) => {
+  const removeCategory = useCallback((categoryId) => {
     setCategories((prevCategories) =>
       prevCategories
         ? prevCategories.filter((cat) => cat.id !== categoryId)
         : []
     );
-  };
+  }, []);
 
   return (
     <CategoryContext.Provider value={categories}>
