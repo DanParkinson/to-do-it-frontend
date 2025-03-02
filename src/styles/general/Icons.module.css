@@ -8,7 +8,6 @@
     transition: color 0.3s ease-in-out;
 }
 
-/* On hover, change color for better UX */
 .ListGroupItem:hover {
     color: var(--color-accent);
     cursor: pointer;

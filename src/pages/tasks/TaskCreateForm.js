@@ -112,9 +112,10 @@ function TaskCreateForm() {
           </Alert>
         ))}
         <Form.Group controlId="category" className={formStyles.FormGroup}>
-          <Form.Label className="d-none">Category</Form.Label>
+          <Form.Label htmlFor="category">Category</Form.Label>
           <Form.Control
             as="select"
+            id="category"
             value={category}
             onChange={handleChange}
             name="category"
@@ -160,9 +161,10 @@ function TaskCreateForm() {
 
         {/* Status */}
         <Form.Group controlId="status" className={formStyles.FormGroup}>
-          <Form.Label className="d-none">Status</Form.Label>
+          <Form.Label htmlFor="status">Status</Form.Label>
           <Form.Control
             as="select"
+            id="status"
             value={status}
             onChange={handleChange}
             name="status"
@@ -183,9 +185,10 @@ function TaskCreateForm() {
 
         {/* Priority */}
         <Form.Group controlId="priority" className={formStyles.FormGroup}>
-          <Form.Label className="d-none">Priority</Form.Label>
+          <Form.Label htmlFor="priority">Priority</Form.Label>
           <Form.Control
             as="select"
+            id="priority"
             value={priority}
             onChange={handleChange}
             name="priority"
