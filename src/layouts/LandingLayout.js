@@ -32,13 +32,6 @@ const LandingLayout = () => {
             <SignUpForm toggleForm={toggleForm} />
           )}
         </Col>
-
-        {/* Right Column: Placeholder for Image */}
-        <Col md={6} className={styles.ImageContainer}>
-          <div>
-            <p>Image Placeholder</p>
-          </div>
-        </Col>
       </Row>
     </Container>
   );
