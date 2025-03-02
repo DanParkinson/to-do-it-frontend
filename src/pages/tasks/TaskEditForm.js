@@ -109,6 +109,7 @@ function TaskEditForm() {
         <Col className={styles.BackButtonCol}>
           <Button
             variant="link"
+            aria-label="back button"
             className={btnStyles.BackIcon}
             onClick={() => window.history.back()}
           >
