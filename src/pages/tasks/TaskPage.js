@@ -56,6 +56,7 @@ function TaskPage() {
             variant="link"
             className={btnStyles.BackIcon}
             onClick={() => history.goBack()}
+            aria-label="Go Back"
           >
             <i className="fa-regular fa-circle-left"></i>
           </Button>
@@ -65,12 +66,14 @@ function TaskPage() {
           <Button
             className={btnStyles.EditButton}
             onClick={() => history.push(`/tasks/${task.id}/edit`)}
+            aria-label="Edit Task"
           >
             <i className="fa-solid fa-pen-to-square"></i>
           </Button>
 
           <Button
             className={btnStyles.DeleteButton}
+            aria-label="Delete Task"
             onClick={(e) => {
               e.preventDefault();
               handleDeleteClick(e, task);
