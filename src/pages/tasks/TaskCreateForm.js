@@ -78,9 +78,10 @@ function TaskCreateForm() {
         <h1 className={formStyles.FormTitle}>Create a Task</h1>
         {/* Title & Options - Side by side on large screens, stacked on small screens */}
         <Form.Group controlId="title" className={formStyles.FormGroup}>
-          <Form.Label className="d-none">Title</Form.Label>
+          <Form.Label htmlFor="title">Title</Form.Label>
           <Form.Control
             type="text"
+            id="title"
             placeholder="Title"
             value={title}
             onChange={handleChange}
@@ -95,9 +96,10 @@ function TaskCreateForm() {
         ))}
 
         <Form.Group controlId="description" className={formStyles.FormGroup}>
-          <Form.Label className="d-none">Description</Form.Label>
+          <Form.Label htmlFor="description">Description</Form.Label>
           <Form.Control
             as="textarea"
+            id="description"
             rows={4}
             placeholder="Description"
             value={description}
@@ -143,9 +145,10 @@ function TaskCreateForm() {
 
         {/* Due Date */}
         <Form.Group controlId="due_date" className={formStyles.FormGroup}>
-          <Form.Label className="d-none">Due Date</Form.Label>
+          <Form.Label htmlFor="due_date">Due Date</Form.Label>
           <Form.Control
             type="date"
+            id="due_date"
             placeholder="Due Date"
             value={due_date}
             onChange={handleChange}
