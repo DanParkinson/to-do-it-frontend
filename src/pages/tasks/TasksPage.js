@@ -79,6 +79,7 @@ const TasksPage = () => {
                           <div className={styles.ButtonContainer}>
                             <Button
                               className={btnStyles.EditButton}
+                              aria-label="edit button"
                               onClick={(e) => {
                                 e.preventDefault();
                                 history.push(`/tasks/${task.id}/edit`);
@@ -89,6 +90,7 @@ const TasksPage = () => {
 
                             <Button
                               className={btnStyles.DeleteButton}
+                              aria-label="delete button"
                               onClick={(e) => {
                                 e.preventDefault();
                                 handleDeleteClick(e, task);
