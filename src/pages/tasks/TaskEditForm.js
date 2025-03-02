@@ -131,9 +131,10 @@ function TaskEditForm() {
 
           {/* Title */}
           <Form.Group controlId="title" className={formStyles.FormGroup}>
-            <Form.Label className="d-none">Title</Form.Label>
+            <Form.Label htmlFor="title">Title</Form.Label>
             <Form.Control
               type="text"
+              id="title"
               placeholder="Title"
               value={title}
               onChange={handleChange}
@@ -149,9 +150,10 @@ function TaskEditForm() {
 
           {/* Description */}
           <Form.Group controlId="description" className={formStyles.FormGroup}>
-            <Form.Label className="d-none">Description</Form.Label>
+            <Form.Label htmlfor="description">Description</Form.Label>
             <Form.Control
               as="textarea"
+              id="description"
               rows={4}
               placeholder="Description"
               value={description}
@@ -168,9 +170,10 @@ function TaskEditForm() {
 
           {/* Category */}
           <Form.Group controlId="category" className={formStyles.FormGroup}>
-            <Form.Label className="d-none">Category</Form.Label>
+            <Form.Label htmlfor="category">Category</Form.Label>
             <Form.Control
               as="select"
+              id="category"
               value={category}
               onChange={handleChange}
               name="category"
@@ -198,9 +201,10 @@ function TaskEditForm() {
 
           {/* Due Date */}
           <Form.Group controlId="due_date" className={formStyles.FormGroup}>
-            <Form.Label className="d-none">Due Date</Form.Label>
+            <Form.Label htmlfor="due_date">Due Date</Form.Label>
             <Form.Control
               type="date"
+              id="due_date"
               placeholder="Due Date"
               value={due_date}
               onChange={handleChange}
@@ -216,9 +220,10 @@ function TaskEditForm() {
 
           {/* Status */}
           <Form.Group controlId="status" className={formStyles.FormGroup}>
-            <Form.Label className="d-none">Status</Form.Label>
+            <Form.Label htmlfor="status">Status</Form.Label>
             <Form.Control
               as="select"
+              id="status"
               value={status}
               onChange={handleChange}
               name="status"
@@ -239,9 +244,10 @@ function TaskEditForm() {
 
           {/* Priority */}
           <Form.Group controlId="priority" className={formStyles.FormGroup}>
-            <Form.Label className="d-none">Priority</Form.Label>
+            <Form.Label html="priority">Priority</Form.Label>
             <Form.Control
               as="select"
+              id="priority"
               value={priority}
               onChange={handleChange}
               name="priority"

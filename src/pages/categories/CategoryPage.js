@@ -57,6 +57,7 @@ const CategoryPage = () => {
             <Col className={styles.BackButtonCol}>
               <Button
                 variant="link"
+                aria-label="Back Button"
                 className={btnStyles.BackIcon}
                 onClick={() => window.history.back()}
               >
@@ -105,6 +106,7 @@ const CategoryPage = () => {
                           <div className={styles.ButtonContainer}>
                             <Button
                               className={btnStyles.EditButton}
+                              aria-label="Edit Task"
                               onClick={(e) => {
                                 e.preventDefault();
                                 history.push(`/tasks/${task.id}/edit`);
@@ -113,6 +115,7 @@ const CategoryPage = () => {
                               <i className="fa-solid fa-pen-to-square"></i>
                             </Button>
                             <Button
+                              aria-label="Delete Task"
                               className={btnStyles.DeleteButton}
                               onClick={(e) => handleDeleteClick(e, task)}
                             >
